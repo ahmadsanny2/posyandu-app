@@ -23,6 +23,12 @@
                         {{ \Carbon\Carbon::parse($toddler->birth_date)->translatedFormat('d F Y') }} ({{ \Carbon\Carbon::parse($toddler->birth_date)->age }} tahun)
                     </p>
                     <p class="text-xs text-slate-400 mt-1">Orang Tua: {{ $toddler->user->name ?? '-' }}</p>
+                    @if($toddler->address)
+                        <p class="text-xs text-slate-500 mt-1"><strong>Alamat:</strong> {{ $toddler->address }}</p>
+                    @endif
+                    @if($toddler->medical_history)
+                        <p class="text-xs text-slate-500 mt-1"><strong>Riwayat Kesehatan:</strong> {{ $toddler->medical_history }}</p>
+                    @endif
                 </div>
             </div>
 

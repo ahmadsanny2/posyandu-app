@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->integer('pregnancy_age_weeks');
             $table->date('estimated_delivery_date');
+            $table->text('address')->nullable();
+            $table->text('medical_history')->nullable();
             $table->timestamps();
         });
     }

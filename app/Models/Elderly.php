@@ -15,6 +15,7 @@ class Elderly extends Model
         'user_id',
         'name',
         'birth_date',
+        'address',
         'medical_history',
     ];
 

@@ -14,6 +14,8 @@ class PregnantWoman extends Model
         'name',
         'pregnancy_age_weeks',
         'estimated_delivery_date',
+        'address',
+        'medical_history',
     ];
 
     public function user()

@@ -14,6 +14,8 @@ class Toddler extends Model
         'name',
         'birth_date',
         'gender',
+        'address',
+        'medical_history',
     ];
 
     public function user()

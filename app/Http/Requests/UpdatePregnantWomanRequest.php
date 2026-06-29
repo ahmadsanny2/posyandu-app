@@ -27,6 +27,8 @@ class UpdatePregnantWomanRequest extends FormRequest
             'name' => 'required|string|max:255',
             'pregnancy_age_weeks' => 'required|integer|min:1|max:44',
             'estimated_delivery_date' => 'required|date|after_or_equal:today',
+            'address' => 'nullable|string',
+            'medical_history' => 'nullable|string',
         ];
     }
 

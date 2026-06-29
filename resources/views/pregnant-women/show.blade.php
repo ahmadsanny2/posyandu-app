@@ -21,6 +21,12 @@
                         HPL: {{ \Carbon\Carbon::parse($pregnantWoman->estimated_delivery_date)->translatedFormat('d F Y') }}
                     </p>
                     <p class="text-xs text-slate-400 mt-1">Orang Tua/Suami: {{ $pregnantWoman->user->name ?? '-' }}</p>
+                    @if($pregnantWoman->address)
+                        <p class="text-xs text-slate-500 mt-1"><strong>Alamat:</strong> {{ $pregnantWoman->address }}</p>
+                    @endif
+                    @if($pregnantWoman->medical_history)
+                        <p class="text-xs text-slate-500 mt-1"><strong>Riwayat Kesehatan:</strong> {{ $pregnantWoman->medical_history }}</p>
+                    @endif
                 </div>
             </div>
 

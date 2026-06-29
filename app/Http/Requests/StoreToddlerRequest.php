@@ -27,6 +27,8 @@ class StoreToddlerRequest extends FormRequest
             'name' => 'required|string|max:255',
             'birth_date' => 'required|date|before_or_equal:today',
             'gender' => 'required|in:M,F',
+            'address' => 'nullable|string',
+            'medical_history' => 'nullable|string',
         ];
     }
 

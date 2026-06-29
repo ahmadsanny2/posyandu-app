@@ -25,6 +25,7 @@ class StoreElderlyRequest extends FormRequest
             'user_id' => 'nullable|exists:users,id',
             'name' => 'required|string|max:255',
             'birth_date' => 'required|date|before_or_equal:today',
+            'address' => 'nullable|string',
             'medical_history' => 'nullable|string',
         ];
     }

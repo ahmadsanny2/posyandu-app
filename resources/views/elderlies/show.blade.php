@@ -17,10 +17,15 @@
                 <div>
                     <h2 class="text-xl font-bold text-slate-800">{{ $elderly->name }}</h2>
                     <p class="text-sm text-slate-500 mt-0.5">
-                        Lahir: {{ \Carbon\Carbon::parse($elderly->birth_date)->translatedFormat('d F Y') }} ({{ \Carbon\Carbon::parse($elderly->birth_date)->age }} tahun) &bull;
-                        Riwayat Medis: {{ $elderly->medical_history ?? 'Tidak ada' }}
+                        Lahir: {{ \Carbon\Carbon::parse($elderly->birth_date)->translatedFormat('d F Y') }} ({{ \Carbon\Carbon::parse($elderly->birth_date)->age }} tahun)
                     </p>
                     <p class="text-xs text-slate-400 mt-1">Akun Keluarga Penanggung Jawab: {{ $elderly->user->name ?? '-' }}</p>
+                    @if($elderly->address)
+                        <p class="text-xs text-slate-500 mt-1"><strong>Alamat:</strong> {{ $elderly->address }}</p>
+                    @endif
+                    @if($elderly->medical_history)
+                        <p class="text-xs text-slate-500 mt-1"><strong>Riwayat Kesehatan:</strong> {{ $elderly->medical_history }}</p>
+                    @endif
                 </div>
             </div>
 

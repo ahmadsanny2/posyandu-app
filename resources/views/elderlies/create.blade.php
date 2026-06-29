@@ -26,6 +26,13 @@
                     <x-input-error class="mt-2" :messages="$errors->get('birth_date')" />
                 </div>
 
+                <!-- Address -->
+                <div>
+                    <x-input-label for="address" value="Alamat Rumah" />
+                    <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address')" />
+                    <x-input-error class="mt-2" :messages="$errors->get('address')" />
+                </div>
+
                 <!-- Medical History -->
                 <div>
                     <x-input-label for="medical_history" value="Riwayat Penyakit (Bisa dikosongkan)" />

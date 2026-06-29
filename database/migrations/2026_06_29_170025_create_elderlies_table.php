@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->date('birth_date');
+            $table->text('address')->nullable();
             $table->text('medical_history')->nullable();
             $table->timestamps();
         });

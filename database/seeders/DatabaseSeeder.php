@@ -66,6 +66,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Budi Santoso',
             'birth_date' => '2024-05-15',
             'gender' => 'M',
+            'address' => 'Jl. Mawar No. 12, RW 01',
+            'medical_history' => 'Lahir prematur 8 bulan, imunisasi dasar lengkap.',
         ]);
 
         $toddlerCitra = Toddler::create([
@@ -73,6 +75,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Citra Lestari',
             'birth_date' => '2025-08-20',
             'gender' => 'F',
+            'address' => 'Jl. Mawar No. 12, RW 01',
+            'medical_history' => 'Alergi dingin, tumbuh kembang sangat aktif.',
         ]);
 
         $pregnantWomanAni = PregnantWoman::create([
@@ -80,6 +84,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ibu Ani (Bumil)',
             'pregnancy_age_weeks' => 24,
             'estimated_delivery_date' => '2026-10-10',
+            'address' => 'Jl. Mawar No. 12, RW 01',
+            'medical_history' => 'Kehamilan kedua, riwayat anemia ringan.',
         ]);
 
         // Under Bapak Eko
@@ -88,12 +94,15 @@ class DatabaseSeeder extends Seeder
             'name' => 'Dedi Wijaya',
             'birth_date' => '2023-11-10',
             'gender' => 'M',
+            'address' => 'Jl. Melati No. 45, RW 01',
+            'medical_history' => 'Tidak ada riwayat penyakit kronis.',
         ]);
 
         $elderlySastro = Elderly::create([
             'user_id' => $parentEko->id,
             'name' => 'Mbah Sastro',
             'birth_date' => '1960-03-12',
+            'address' => 'Jl. Melati No. 45, RW 01',
             'medical_history' => 'Hipertensi dan Asam Urat',
         ]);
 

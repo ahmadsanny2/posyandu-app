@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->date('birth_date');
             $table->enum('gender', ['M', 'F']);
+            $table->text('address')->nullable();
+            $table->text('medical_history')->nullable();
             $table->timestamps();
         });
     }

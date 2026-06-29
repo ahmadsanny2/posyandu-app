@@ -146,4 +146,26 @@ class PosyanduFeatureTest extends TestCase
             'immunization_type' => 'DPT 1',
         ]);
     }
+
+    public function test_kader_can_create_toddler_with_address_and_medical_history(): void
+    {
+        $kader = User::factory()->create(['role' => 'kader']);
+        $parent = User::factory()->create(['role' => 'parent']);
+
+        $response = $this->actingAs($kader)->post(route('toddlers.store'), [
+            'user_id' => $parent->id,
+            'name' => 'Fahri Alamsyah',
+            'birth_date' => '2025-02-14',
+            'gender' => 'M',
+            'address' => 'Jl. Kenanga No. 5, RW 01',
+            'medical_history' => 'Lahir caesar, tidak ada alergi.',
+        ]);
+
+        $response->assertStatus(302);
+        $this->assertDatabaseHas('toddlers', [
+            'name' => 'Fahri Alamsyah',
+            'address' => 'Jl. Kenanga No. 5, RW 01',
+            'medical_history' => 'Lahir caesar, tidak ada alergi.',
+        ]);
+    }
 }

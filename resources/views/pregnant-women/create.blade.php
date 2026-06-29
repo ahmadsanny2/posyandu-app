@@ -47,6 +47,20 @@
                     </div>
                 @endif
 
+                <!-- Address -->
+                <div>
+                    <x-input-label for="address" value="Alamat Rumah" />
+                    <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address')" />
+                    <x-input-error class="mt-2" :messages="$errors->get('address')" />
+                </div>
+
+                <!-- Medical History -->
+                <div>
+                    <x-input-label for="medical_history" value="Riwayat Kesehatan Dasar / Catatan Khusus" />
+                    <textarea id="medical_history" name="medical_history" rows="3" class="mt-1 block w-full rounded-xl border-slate-200 text-sm focus:border-primary focus:ring focus:ring-blue-100 transition-shadow">{{ old('medical_history') }}</textarea>
+                    <x-input-error class="mt-2" :messages="$errors->get('medical_history')" />
+                </div>
+
                 <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 mt-6">
                     <a href="{{ route('pregnant-women.index') }}" class="px-4 py-2 border border-slate-200 text-slate-600 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-colors">Batal</a>
                     <x-primary-button>Simpan Data</x-primary-button>
