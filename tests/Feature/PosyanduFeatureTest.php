@@ -15,27 +15,31 @@ class PosyanduFeatureTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Test that Admin can access user management page.
+     * Test that Admin can access user management pages.
      */
     public function test_admin_can_access_user_management(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
 
-        $response = $this->actingAs($admin)->get(route('users.index'));
+        $response1 = $this->actingAs($admin)->get(route('kaders.index'));
+        $response2 = $this->actingAs($admin)->get(route('parents.index'));
 
-        $response->assertStatus(200);
+        $response1->assertStatus(200);
+        $response2->assertStatus(200);
     }
 
     /**
-     * Test that non-Admin (e.g. Parent) cannot access user management.
+     * Test that non-Admin (e.g. Parent) cannot access user management pages.
      */
     public function test_non_admin_cannot_access_user_management(): void
     {
         $parent = User::factory()->create(['role' => 'parent']);
 
-        $response = $this->actingAs($parent)->get(route('users.index'));
+        $response1 = $this->actingAs($parent)->get(route('kaders.index'));
+        $response2 = $this->actingAs($parent)->get(route('parents.index'));
 
-        $response->assertStatus(403);
+        $response1->assertStatus(403);
+        $response2->assertStatus(403);
     }
 
     /**

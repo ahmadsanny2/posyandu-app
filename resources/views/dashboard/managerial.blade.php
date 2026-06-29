@@ -79,9 +79,15 @@
                 </div>
                 <div class="px-5 py-3 bg-slate-50 border-t border-slate-100">
                     @if(auth()->user()->isAdmin())
-                        <a href="{{ route('users.index') }}" class="text-xs font-semibold text-purple-600 hover:text-purple-700 flex items-center gap-1">
-                            Kelola User &rarr;
-                        </a>
+                        <div class="flex items-center gap-2">
+                            <a href="{{ route('kaders.index') }}" class="text-xs font-semibold text-purple-600 hover:text-purple-700">
+                                Kelola Kader &rarr;
+                            </a>
+                            <span class="text-slate-300 text-xs">|</span>
+                            <a href="{{ route('parents.index') }}" class="text-xs font-semibold text-purple-600 hover:text-purple-700">
+                                Kelola Orang Tua &rarr;
+                            </a>
+                        </div>
                     @else
                         <span class="text-xs text-slate-400">Hanya diakses oleh Admin</span>
                     @endif

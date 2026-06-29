@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\KaderController;
+use App\Http\Controllers\ParentUserController;
 use App\Http\Controllers\ToddlerController;
 use App\Http\Controllers\PregnantWomanController;
 use App\Http\Controllers\ElderlyController;
@@ -30,7 +31,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Admin Only Routes
     Route::middleware('role:admin')->group(function () {
-        Route::resource('users', UserController::class);
+        Route::resource('users/kaders', KaderController::class)->parameters(['kaders' => 'kader'])->names('kaders');
+        Route::resource('users/parents', ParentUserController::class)->parameters(['parents' => 'parent'])->names('parents');
     });
 
     // Kader and Admin Only Routes for Participant Management
