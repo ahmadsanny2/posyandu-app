@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ToddlerController;
 use App\Http\Controllers\PregnantWomanController;
 use App\Http\Controllers\ElderlyController;
+use App\Http\Controllers\ScheduleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,6 +32,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('toddlers', ToddlerController::class);
     Route::resource('pregnant-women', PregnantWomanController::class);
     Route::resource('elderlies', ElderlyController::class);
+
+    // Schedules (Jadwal Kegiatan)
+    Route::resource('schedules', ScheduleController::class);
+    Route::post('schedules/{schedule}/rsvp', [ScheduleController::class, 'rsvp'])->name('schedules.rsvp');
 });
 
 require __DIR__.'/auth.php';
