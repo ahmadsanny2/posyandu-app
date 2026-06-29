@@ -53,6 +53,123 @@
             </div>
         </div>
 
+        <!-- Growth Charts Card -->
+        @if(!$measurements->isEmpty())
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <x-card title="Grafik Tumbuh Kembang (Berat & Tinggi)">
+                    <div class="h-64">
+                        <canvas id="weightHeightChart"></canvas>
+                    </div>
+                </x-card>
+                <x-card title="Grafik Lingkar Kepala">
+                    <div class="h-64">
+                        <canvas id="headCircumferenceChart"></canvas>
+                    </div>
+                </x-card>
+            </div>
+            
+            <!-- Load Chart.js CDN -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const ctx1 = document.getElementById('weightHeightChart').getContext('2d');
+                    const ctx2 = document.getElementById('headCircumferenceChart').getContext('2d');
+                    
+                    const labels = [
+                        @foreach($measurements as $record)
+                            "{{ $record->created_at->translatedFormat('d M Y') }}",
+                        @endforeach
+                    ];
+                    
+                    const weightData = [
+                        @foreach($measurements as $record)
+                            {{ $record->weight_kg }},
+                        @endforeach
+                    ];
+                    
+                    const heightData = [
+                        @foreach($measurements as $record)
+                            {{ $record->height_cm }},
+                        @endforeach
+                    ];
+                    
+                    const headCircData = [
+                        @foreach($measurements as $record)
+                            {{ $record->head_circumference_cm }},
+                        @endforeach
+                    ];
+
+                    new Chart(ctx1, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Berat Badan (kg)',
+                                    data: weightData,
+                                    borderColor: '#2563EB',
+                                    backgroundColor: 'rgba(37, 99, 235, 0.05)',
+                                    tension: 0.3,
+                                    yAxisID: 'yWeight',
+                                },
+                                {
+                                    label: 'Tinggi Badan (cm)',
+                                    data: heightData,
+                                    borderColor: '#EC4899',
+                                    backgroundColor: 'rgba(236, 72, 153, 0.05)',
+                                    tension: 0.3,
+                                    yAxisID: 'yHeight',
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                yWeight: {
+                                    type: 'linear',
+                                    position: 'left',
+                                    title: { display: true, text: 'Berat (kg)', font: { size: 10 } }
+                                },
+                                yHeight: {
+                                    type: 'linear',
+                                    position: 'right',
+                                    title: { display: true, text: 'Tinggi (cm)', font: { size: 10 } },
+                                    grid: { drawOnChartArea: false }
+                                }
+                            }
+                        }
+                    });
+
+                    new Chart(ctx2, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Lingkar Kepala (cm)',
+                                    data: headCircData,
+                                    borderColor: '#10B981',
+                                    backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                                    tension: 0.3,
+                                    fill: true,
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    title: { display: true, text: 'Lingkar Kepala (cm)', font: { size: 10 } }
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+        @endif
+
         <!-- History of Measurements -->
         <x-card title="Kartu Menuju Sehat (KMS)" subtitle="Riwayat pengukuran tinggi, berat badan, lingkar kepala, dan imunisasi balita">
             @if($measurements->isEmpty())

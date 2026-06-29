@@ -84,6 +84,32 @@ class ScheduleController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Schedule $schedule)
+    {
+        // Fetch RSVPs (attendances) for this schedule
+        $attendances = $schedule->attendances()->with('user')->get();
+
+        // Get participants list based on target type
+        $participants = [];
+        $existingMeasurementIds = [];
+        
+        if ($schedule->target_type === 'toddler') {
+            $participants = \App\Models\Toddler::with('user')->get();
+            $existingMeasurementIds = $schedule->toddlerMeasurements()->pluck('toddler_id')->toArray();
+        } elseif ($schedule->target_type === 'pregnant_woman') {
+            $participants = \App\Models\PregnantWoman::with('user')->get();
+            $existingMeasurementIds = $schedule->pregnancyRecords()->pluck('pregnant_woman_id')->toArray();
+        } elseif ($schedule->target_type === 'elderly') {
+            $participants = \App\Models\Elderly::with('user')->get();
+            $existingMeasurementIds = $schedule->elderlyRecords()->pluck('elderly_id')->toArray();
+        }
+
+        return view('schedules.show', compact('schedule', 'attendances', 'participants', 'existingMeasurementIds'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Schedule $schedule)

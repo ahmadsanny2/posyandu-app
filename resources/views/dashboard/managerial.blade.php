@@ -89,46 +89,102 @@
             </x-card>
         </div>
 
-        <!-- Schedules Section -->
-        <x-card title="Agenda Kegiatan Terdekat" subtitle="Jadwal posyandu bulanan yang akan datang">
-            @if($schedules->isEmpty())
-                <div class="py-8 text-center text-slate-400">
-                    <p>Tidak ada agenda kegiatan terdekat.</p>
-                </div>
-            @else
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="border-b border-slate-100 text-xs font-bold text-slate-400 uppercase">
-                                <th class="pb-3">Kegiatan</th>
-                                <th class="pb-3">Sasaran</th>
-                                <th class="pb-3">Tanggal & Waktu</th>
-                                <th class="pb-3">Lokasi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-50 text-sm">
-                            @foreach($schedules as $schedule)
-                                <tr>
-                                    <td class="py-3 font-semibold text-slate-800">{{ $schedule->title }}</td>
-                                    <td class="py-3">
-                                        <span class="px-2.5 py-1 rounded-full text-xs font-medium 
-                                            {{ $schedule->target_type == 'toddler' ? 'bg-blue-50 text-blue-700' : '' }}
-                                            {{ $schedule->target_type == 'pregnant_woman' ? 'bg-pink-50 text-pink-700' : '' }}
-                                            {{ $schedule->target_type == 'elderly' ? 'bg-emerald-50 text-emerald-700' : '' }}
-                                        ">
-                                            @if($schedule->target_type == 'toddler') Balita @endif
-                                            @if($schedule->target_type == 'pregnant_woman') Ibu Hamil @endif
-                                            @if($schedule->target_type == 'elderly') Lansia @endif
-                                        </span>
-                                    </td>
-                                    <td class="py-3 text-slate-500">{{ $schedule->scheduled_at->translatedFormat('d F Y, H:i') }} WIB</td>
-                                    <td class="py-3 text-slate-500">{{ $schedule->location }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @endif
-        </x-card>
+        <!-- Schedules & Analytics Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Schedules Section -->
+            <div class="lg:col-span-2">
+                <x-card title="Agenda Kegiatan Terdekat" subtitle="Jadwal posyandu bulanan yang akan datang">
+                    @if($schedules->isEmpty())
+                        <div class="py-8 text-center text-slate-400">
+                            <p>Tidak ada agenda kegiatan terdekat.</p>
+                        </div>
+                    @else
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-slate-100 text-xs font-bold text-slate-400 uppercase">
+                                        <th class="pb-3">Kegiatan</th>
+                                        <th class="pb-3">Sasaran</th>
+                                        <th class="pb-3">Tanggal & Waktu</th>
+                                        <th class="pb-3">Lokasi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-50 text-sm">
+                                    @foreach($schedules as $schedule)
+                                        <tr>
+                                            <td class="py-3 font-semibold text-slate-800">
+                                                <a href="{{ route('schedules.show', $schedule->id) }}" class="hover:text-primary transition-colors">
+                                                    {{ $schedule->title }}
+                                                </a>
+                                            </td>
+                                            <td class="py-3">
+                                                <span class="px-2.5 py-1 rounded-full text-xs font-medium 
+                                                    {{ $schedule->target_type == 'toddler' ? 'bg-blue-50 text-blue-700' : '' }}
+                                                    {{ $schedule->target_type == 'pregnant_woman' ? 'bg-pink-50 text-pink-700' : '' }}
+                                                    {{ $schedule->target_type == 'elderly' ? 'bg-emerald-50 text-emerald-700' : '' }}
+                                                ">
+                                                    @if($schedule->target_type == 'toddler') Balita @endif
+                                                    @if($schedule->target_type == 'pregnant_woman') Ibu Hamil @endif
+                                                    @if($schedule->target_type == 'elderly') Lansia @endif
+                                                </span>
+                                            </td>
+                                            <td class="py-3 text-slate-500">{{ $schedule->scheduled_at->translatedFormat('d F Y, H:i') }} WIB</td>
+                                            <td class="py-3 text-slate-500">{{ $schedule->location }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+                </x-card>
+            </div>
+
+            <!-- Health check distributions -->
+            <div>
+                <x-card title="Proporsi Layanan" subtitle="Distribusi total rekam medis yang dicatat">
+                    <div class="h-64 flex items-center justify-center">
+                        @if($stats['toddler_measurements_count'] + $stats['pregnancy_records_count'] + $stats['elderly_records_count'] == 0)
+                            <p class="text-sm text-slate-400 font-medium">Belum ada rekam medis terdaftar.</p>
+                        @else
+                            <canvas id="checkupChart"></canvas>
+                        @endif
+                    </div>
+                </x-card>
+            </div>
+        </div>
+
+        @if($stats['toddler_measurements_count'] + $stats['pregnancy_records_count'] + $stats['elderly_records_count'] > 0)
+            <!-- Load Chart.js CDN -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const ctx = document.getElementById('checkupChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Balita', 'Ibu Hamil', 'Lansia'],
+                            datasets: [{
+                                data: [
+                                    {{ $stats['toddler_measurements_count'] }},
+                                    {{ $stats['pregnancy_records_count'] }},
+                                    {{ $stats['elderly_records_count'] }}
+                                ],
+                                backgroundColor: ['#2563EB', '#EC4899', '#10B981'],
+                                hoverOffset: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+        @endif
     </div>
 </x-app-layout>

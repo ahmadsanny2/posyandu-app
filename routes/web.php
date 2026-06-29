@@ -7,6 +7,9 @@ use App\Http\Controllers\ToddlerController;
 use App\Http\Controllers\PregnantWomanController;
 use App\Http\Controllers\ElderlyController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ToddlerMeasurementController;
+use App\Http\Controllers\PregnancyRecordController;
+use App\Http\Controllers\ElderlyRecordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,6 +39,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Schedules (Jadwal Kegiatan)
     Route::resource('schedules', ScheduleController::class);
     Route::post('schedules/{schedule}/rsvp', [ScheduleController::class, 'rsvp'])->name('schedules.rsvp');
+
+    // Medical Records Recording (Kader/Admin Only)
+    Route::middleware('role:admin,kader')->group(function () {
+        Route::get('schedules/{schedule}/toddlers/{toddler}/measure', [ToddlerMeasurementController::class, 'create'])->name('toddlers.measure.create');
+        Route::post('toddlers/measure', [ToddlerMeasurementController::class, 'store'])->name('toddlers.measure.store');
+
+        Route::get('schedules/{schedule}/pregnant-women/{pregnant_woman}/record', [PregnancyRecordController::class, 'create'])->name('pregnant-women.record.create');
+        Route::post('pregnant-women/record', [PregnancyRecordController::class, 'store'])->name('pregnant-women.record.store');
+
+        Route::get('schedules/{schedule}/elderlies/{elderly}/record', [ElderlyRecordController::class, 'create'])->name('elderlies.record.create');
+        Route::post('elderlies/record', [ElderlyRecordController::class, 'store'])->name('elderlies.record.store');
+    });
 });
 
 require __DIR__.'/auth.php';

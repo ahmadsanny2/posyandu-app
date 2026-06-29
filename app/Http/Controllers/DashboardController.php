@@ -45,6 +45,9 @@ class DashboardController extends Controller
             'pregnant_women_count' => PregnantWoman::count(),
             'elderlies_count' => Elderly::count(),
             'users_count' => User::count(),
+            'toddler_measurements_count' => \App\Models\ToddlerMeasurement::count(),
+            'pregnancy_records_count' => \App\Models\PregnancyRecord::count(),
+            'elderly_records_count' => \App\Models\ElderlyRecord::count(),
         ];
 
         $schedules = Schedule::where('scheduled_at', '>=', now()->startOfDay())
