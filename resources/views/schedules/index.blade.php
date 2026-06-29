@@ -63,7 +63,11 @@
                         <tbody class="divide-y divide-slate-100 text-sm">
                             @foreach($schedules as $schedule)
                                 <tr class="hover:bg-slate-50/50 transition-colors">
-                                    <td class="px-6 py-4 font-bold text-slate-800">{{ $schedule->title }}</td>
+                                    <td class="px-6 py-4 font-bold text-slate-800">
+                                        <a href="{{ route('schedules.show', $schedule->id) }}" class="text-blue-600 hover:text-blue-800 hover:underline">
+                                            {{ $schedule->title }}
+                                        </a>
+                                    </td>
                                     <td class="px-6 py-4">
                                         <span class="px-2.5 py-1 rounded-full text-xs font-semibold
                                             {{ $schedule->target_type == 'toddler' ? 'bg-blue-50 text-blue-700' : '' }}
@@ -83,6 +87,9 @@
                                         <!-- If Admin/Kader, show Edit/Delete -->
                                         @if(auth()->user()->isAdmin() || auth()->user()->isKader())
                                             <div class="flex items-center justify-end gap-2">
+                                                <a href="{{ route('schedules.show', $schedule->id) }}" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors" title="Detail & Rekam">
+                                                    Detail & Rekam
+                                                </a>
                                                 <a href="{{ route('schedules.edit', $schedule->id) }}" class="p-1.5 hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded-lg transition-colors" title="Edit">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                                 </a>
