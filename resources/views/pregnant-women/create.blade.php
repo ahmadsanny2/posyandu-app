@@ -3,7 +3,7 @@
         Daftarkan Ibu Hamil Baru
     </x-slot>
 
-    <div class="max-w-2xl mx-auto">
+    <div class="max-w-2xl">
         <div class="mb-4">
             <a href="{{ route('pregnant-women.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1.5">&larr; Kembali ke Daftar</a>
         </div>

@@ -3,7 +3,7 @@
         Laporan Kegiatan Posyandu
     </x-slot>
 
-    <div class="max-w-xl mx-auto space-y-6">
+    <div class="max-w-xl space-y-6">
         <x-card title="Cetak Rekap Bulanan" subtitle="Pilih filter di bawah ini untuk mengunduh atau mencetak laporan resmi bulanan">
             <form method="GET" action="{{ route('reports.print') }}" target="_blank" class="space-y-4">
                 <!-- Report Type -->

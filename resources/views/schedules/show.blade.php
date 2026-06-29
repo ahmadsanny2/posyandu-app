@@ -3,7 +3,7 @@
         Detail Jadwal Kegiatan Posyandu
     </x-slot>
 
-    <div class="space-y-6 max-w-5xl mx-auto">
+    <div class="space-y-6 max-w-5xl">
         <div class="mb-4">
             <a href="{{ route('schedules.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1.5">&larr; Kembali ke Daftar</a>
         </div>

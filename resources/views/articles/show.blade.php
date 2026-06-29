@@ -3,7 +3,7 @@
         Detail Artikel Edukasi
     </x-slot>
 
-    <div class="max-w-4xl mx-auto space-y-6">
+    <div class="max-w-4xl space-y-6">
         <div class="mb-4">
             <a href="{{ route('articles.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1.5">&larr; Kembali ke Daftar</a>
         </div>
