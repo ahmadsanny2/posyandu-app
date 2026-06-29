@@ -10,6 +10,9 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ToddlerMeasurementController;
 use App\Http\Controllers\PregnancyRecordController;
 use App\Http\Controllers\ElderlyRecordController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,7 +53,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('schedules/{schedule}/elderlies/{elderly}/record', [ElderlyRecordController::class, 'create'])->name('elderlies.record.create');
         Route::post('elderlies/record', [ElderlyRecordController::class, 'store'])->name('elderlies.record.store');
+
+        // Reports (Laporan) - Kader/Admin Only
+        Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+        Route::get('reports/print', [ReportController::class, 'print'])->name('reports.print');
     });
+
+    // Articles & Galleries (Available for all authenticated actors)
+    Route::resource('articles', ArticleController::class);
+    Route::resource('galleries', GalleryController::class);
 });
 
 require __DIR__.'/auth.php';

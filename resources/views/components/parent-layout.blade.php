@@ -40,12 +40,12 @@
                         Jadwal Posyandu
                     </a>
 
-                    <a href="#" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors text-slate-600 hover:bg-slate-50 hover:text-slate-800">
+                    <a href="{{ route('articles.index') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors {{ request()->routeIs('articles.*') ? 'bg-blue-50 text-primary font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
                         Artikel Edukasi
                     </a>
 
-                    <a href="#" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors text-slate-600 hover:bg-slate-50 hover:text-slate-800">
+                    <a href="{{ route('galleries.index') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors {{ request()->routeIs('galleries.*') ? 'bg-blue-50 text-primary font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         Galeri Kegiatan
                     </a>
@@ -130,13 +130,13 @@
             </a>
 
             <!-- Artikel -->
-            <a href="#" class="flex flex-col items-center justify-center flex-1 text-center py-2 transition-colors text-slate-400 hover:text-slate-600">
+            <a href="{{ route('articles.index') }}" class="flex flex-col items-center justify-center flex-1 text-center py-2 transition-colors {{ request()->routeIs('articles.*') ? 'text-primary' : 'text-slate-400 hover:text-slate-600' }}">
                 <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
                 <span class="text-[10px] font-medium mt-1">Artikel</span>
             </a>
 
             <!-- Galeri -->
-            <a href="#" class="flex flex-col items-center justify-center flex-1 text-center py-2 transition-colors text-slate-400 hover:text-slate-600">
+            <a href="{{ route('galleries.index') }}" class="flex flex-col items-center justify-center flex-1 text-center py-2 transition-colors {{ request()->routeIs('galleries.*') ? 'text-primary' : 'text-slate-400 hover:text-slate-600' }}">
                 <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 <span class="text-[10px] font-medium mt-1">Galeri</span>
             </a>
