@@ -1,8 +1,4 @@
-@php
-    $layoutTag = auth()->user()->isParent() ? 'x-parent-layout' : 'x-app-layout';
-@endphp
-
-<{{ $layoutTag }}>
+<x-dynamic-component :component="auth()->user()->isParent() ? 'parent-layout' : 'app-layout'">
     <x-slot name="header">
         Detail Artikel Edukasi
     </x-slot>
@@ -51,4 +47,4 @@
             </div>
         </div>
     </div>
-</{{ $layoutTag }}>
+</x-dynamic-component>
