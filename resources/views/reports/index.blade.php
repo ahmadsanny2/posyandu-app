@@ -3,20 +3,20 @@
         Laporan Kegiatan Posyandu
     </x-slot>
 
-    <div class="max-w-xl space-y-6">
+    <div class="space-y-6">
         <x-card title="Cetak Rekap Bulanan" subtitle="Pilih filter di bawah ini untuk mengunduh atau mencetak laporan resmi bulanan">
-            <form method="GET" action="{{ route('reports.print') }}" target="_blank" class="space-y-4">
-                <!-- Report Type -->
-                <div>
-                    <x-input-label for="report_type" value="Jenis Laporan" />
-                    <select id="report_type" name="report_type" class="mt-1 block w-full rounded-xl border-slate-200 text-sm focus:border-primary focus:ring focus:ring-blue-100 transition-shadow" required>
-                        <option value="toddler">Laporan Pemeriksaan Balita (KMS)</option>
-                        <option value="pregnant_woman">Laporan Pemeriksaan Ibu Hamil</option>
-                        <option value="elderly">Laporan Pemeriksaan Lansia</option>
-                    </select>
-                </div>
+            <form method="GET" action="{{ route('reports.print') }}" target="_blank" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Report Type -->
+                    <div>
+                        <x-input-label for="report_type" value="Jenis Laporan" />
+                        <select id="report_type" name="report_type" class="mt-1 block w-full rounded-xl border-slate-200 text-sm focus:border-primary focus:ring focus:ring-blue-100 transition-shadow" required>
+                            <option value="toddler">Laporan Pemeriksaan Balita (KMS)</option>
+                            <option value="pregnant_woman">Laporan Pemeriksaan Ibu Hamil</option>
+                            <option value="elderly">Laporan Pemeriksaan Lansia</option>
+                        </select>
+                    </div>
 
-                <div class="grid grid-cols-2 gap-4">
                     <!-- Month -->
                     <div>
                         <x-input-label for="month" value="Bulan" />
