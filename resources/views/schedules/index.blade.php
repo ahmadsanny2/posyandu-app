@@ -57,11 +57,11 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="border-b border-slate-100 text-xs font-bold text-slate-400 uppercase bg-slate-50/75">
-                                <th class="px-6 py-4">Nama Kegiatan</th>
-                                <th class="px-6 py-4">Sasaran</th>
-                                <th class="px-6 py-4">Tanggal & Waktu</th>
-                                <th class="px-6 py-4">Lokasi</th>
-                                <th class="px-6 py-4 text-right">Aksi / RSVP</th>
+                                <th class="px-6 py-4 min-w-[250px]">Nama Kegiatan</th>
+                                <th class="px-6 py-4 min-w-[150px]">Sasaran</th>
+                                <th class="px-6 py-4 min-w-[250px]">Tanggal & Waktu</th>
+                                <th class="px-6 py-4 min-w-[200px]">Lokasi</th>
+                                <th class="px-6 py-4 text-right min-w-[150px]">Aksi / RSVP</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 text-sm">
@@ -117,7 +117,7 @@
                                                 @endphp
 
                                                 @if($rsvp)
-                                                    <span class="text-xs font-semibold px-2 py-1 rounded 
+                                                    <span class="text-xs font-semibold px-2 py-1 rounded
                                                         {{ $rsvp->is_present ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-red-50 text-red-700 border border-red-100' }}
                                                     ">
                                                         RSVP: {{ $rsvp->is_present ? 'Hadir' : 'Absen' }}
@@ -126,7 +126,7 @@
                                                     <form method="POST" action="{{ route('schedules.rsvp', $schedule->id) }}" class="flex items-center gap-1.5">
                                                         @csrf
                                                         <input type="hidden" name="notes" value="RSVP via Web">
-                                                        
+
                                                         <button type="submit" name="is_present" value="1" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-xs font-bold transition-colors">
                                                             Hadir
                                                         </button>

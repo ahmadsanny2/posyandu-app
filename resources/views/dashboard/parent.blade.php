@@ -24,15 +24,15 @@
                     @else
                         <div class="divide-y divide-slate-100">
                             @foreach($toddlers as $toddler)
-                                <div class="py-3 flex items-center justify-between">
+                                <div class="py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 lg:gap">
                                     <div>
                                         <h4 class="font-bold text-slate-800">{{ $toddler->name }}</h4>
                                         <p class="text-xs text-slate-500 mt-0.5">
-                                            {{ $toddler->gender == 'M' ? 'Laki-laki' : 'Perempuan' }} &bull; 
+                                            {{ $toddler->gender == 'M' ? 'Laki-laki' : 'Perempuan' }} &bull;
                                             Lahir: {{ \Carbon\Carbon::parse($toddler->birth_date)->translatedFormat('d M Y') }}
                                         </p>
                                     </div>
-                                    <a href="{{ route('toddlers.show', $toddler->id) }}" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-primary text-xs font-semibold rounded-lg transition-colors">
+                                    <a href="{{ route('toddlers.show', $toddler->id) }}" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-primary w-fit text-xs font-semibold rounded-lg transition-colors">
                                         Detail KMS
                                     </a>
                                 </div>
@@ -50,15 +50,15 @@
                     @else
                         <div class="divide-y divide-slate-100">
                             @foreach($pregnantWomen as $woman)
-                                <div class="py-3 flex items-center justify-between">
+                                <div class="py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 lg:gap">
                                     <div>
                                         <h4 class="font-bold text-slate-800">{{ $woman->name }}</h4>
                                         <p class="text-xs text-slate-500 mt-0.5">
-                                            Usia Kandungan: {{ $woman->pregnancy_age_weeks }} minggu &bull; 
+                                            Usia Kandungan: {{ $woman->pregnancy_age_weeks }} minggu &bull;
                                             HPL: {{ \Carbon\Carbon::parse($woman->estimated_delivery_date)->translatedFormat('d M Y') }}
                                         </p>
                                     </div>
-                                    <a href="{{ route('pregnant-women.show', $woman->id) }}" class="px-3 py-1.5 bg-pink-50 hover:bg-pink-100 text-pink-600 text-xs font-semibold rounded-lg transition-colors">
+                                    <a href="{{ route('pregnant-women.show', $woman->id) }}" class="px-3 py-1.5 bg-pink-50 hover:bg-pink-100 text-pink-600 text-xs font-semibold rounded-lg transition-colors w-fit">
                                         Detail Bumil
                                     </a>
                                 </div>
@@ -76,7 +76,7 @@
                     @else
                         <div class="divide-y divide-slate-100">
                             @foreach($elderlies as $elderly)
-                                <div class="py-3 flex items-center justify-between">
+                                <div class="py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 lg:gap">
                                     <div>
                                         <h4 class="font-bold text-slate-800">{{ $elderly->name }}</h4>
                                         <p class="text-xs text-slate-500 mt-0.5">
@@ -84,7 +84,7 @@
                                             Riwayat: {{ $elderly->medical_history ?? 'Tidak ada' }}
                                         </p>
                                     </div>
-                                    <a href="{{ route('elderlies.show', $elderly->id) }}" class="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 text-xs font-semibold rounded-lg transition-colors">
+                                    <a href="{{ route('elderlies.show', $elderly->id) }}" class="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 text-xs font-semibold rounded-lg transition-colors w-fit">
                                         Detail Lansia
                                     </a>
                                 </div>
@@ -104,7 +104,7 @@
                             @foreach($schedules as $schedule)
                                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full 
+                                        <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full
                                             {{ $schedule->target_type == 'toddler' ? 'bg-blue-100 text-blue-700' : '' }}
                                             {{ $schedule->target_type == 'pregnant_woman' ? 'bg-pink-100 text-pink-700' : '' }}
                                             {{ $schedule->target_type == 'elderly' ? 'bg-emerald-100 text-emerald-700' : '' }}

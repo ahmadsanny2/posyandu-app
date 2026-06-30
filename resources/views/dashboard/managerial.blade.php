@@ -11,7 +11,7 @@
         </div>
 
         <!-- Quick Stats Grid -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Balita -->
             <x-card :padding="false">
                 <div class="p-5 flex items-center justify-between">
@@ -123,7 +123,7 @@
                                                 {{ $schedule->title }}
                                             </td>
                                             <td class="py-3">
-                                                <span class="px-2.5 py-1 rounded-full text-xs font-medium 
+                                                <span class="px-2.5 py-1 rounded-full text-xs font-medium
                                                     {{ $schedule->target_type == 'toddler' ? 'bg-blue-50 text-blue-700' : '' }}
                                                     {{ $schedule->target_type == 'pregnant_woman' ? 'bg-pink-50 text-pink-700' : '' }}
                                                     {{ $schedule->target_type == 'elderly' ? 'bg-emerald-50 text-emerald-700' : '' }}
