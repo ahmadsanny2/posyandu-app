@@ -18,6 +18,13 @@ class PregnantWoman extends Model
         'medical_history',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'estimated_delivery_date' => 'date',
+        ];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

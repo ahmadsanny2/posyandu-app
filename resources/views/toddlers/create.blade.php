@@ -43,7 +43,7 @@
                         <!-- Parent dropdown for Admin/Kader, hidden for Parent -->
                         @if(!auth()->user()->isParent())
                             <div>
-                                <x-input-label for="user_id" value="Hubungkan ke Akun Orang Tua" />
+                                <x-input-label for="user_id" value="Orang Tua" />
                                 <select id="user_id" name="user_id" class="mt-1 block w-full rounded-xl border-slate-200 text-sm focus:border-primary focus:ring focus:ring-blue-100 transition-shadow" required>
                                     <option value="">Pilih Orang Tua</option>
                                     @foreach($parents as $parent)

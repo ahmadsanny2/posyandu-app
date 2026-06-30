@@ -18,6 +18,13 @@ class Toddler extends Model
         'medical_history',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'birth_date' => 'date',
+        ];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
