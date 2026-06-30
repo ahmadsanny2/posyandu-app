@@ -71,12 +71,19 @@
     </style>
 </head>
 <body>
+    @php
+        $setting = \App\Models\Setting::firstOrCreate([]);
+    @endphp
 
     <!-- Official Letterhead (KOP Surat) -->
     <div class="letterhead">
-        <h1>Posyandu RW Karsa Bakti</h1>
-        <p>Kelurahan Asri Jaya, Kecamatan Sukamakmur, Kota Sejahtera</p>
-        <p>Telepon: 0812-3456-7890 | Email: info@posyandurw.or.id</p>
+        <h1>{{ $setting->posyandu_name }}</h1>
+        <p>{{ $setting->address }}</p>
+        <p>
+            @if($setting->phone) Telepon: {{ $setting->phone }} @endif
+            @if($setting->phone && $setting->email) | @endif
+            @if($setting->email) Email: {{ $setting->email }} @endif
+        </p>
     </div>
 
     <!-- Title -->
@@ -182,10 +189,21 @@
         <tr>
             <td style="width: 60%;"></td>
             <td style="width: 40%;">
-                <p>Kota Sejahtera, {{ now()->translatedFormat('d F Y') }}</p>
-                <p style="margin-top: 5px;">Ketua Posyandu RW</p>
+                <p>
+                    @if($setting->address)
+                        @php
+                            $parts = explode(',', $setting->address);
+                            $city = trim(end($parts));
+                        @endphp
+                        {{ $city ?: 'Kota Sejahtera' }},
+                    @else
+                        Kota Sejahtera,
+                    @endif
+                    {{ now()->translatedFormat('d F Y') }}
+                </p>
+                <p style="margin-top: 5px;">Ketua {{ $setting->posyandu_name }}</p>
                 <div style="height: 60px;"></div>
-                <p><strong>( ____________________ )</strong></p>
+                <p><strong>( <u>{{ $setting->leader_name ?? '____________________' }}</u> )</strong></p>
                 <p style="font-size: 9px; color: #64748b; margin-top: 5px;">NIP. Posyandu-{{ $year }}-{{ $monthName }}</p>
             </td>
         </tr>

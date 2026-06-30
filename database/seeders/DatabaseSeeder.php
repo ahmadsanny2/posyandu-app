@@ -23,6 +23,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // 0. Seed Settings
+        \App\Models\Setting::create([
+            'posyandu_name' => 'Posyandu RW Karsa Bakti',
+            'address' => 'Kelurahan Asri Jaya, Kecamatan Sukamakmur, Kota Sejahtera',
+            'phone' => '0812-3456-7890',
+            'email' => 'info@posyandurw.or.id',
+            'leader_name' => 'Dr. Herawati',
+        ]);
+
         // 1. Seed Users
         $admin = User::create([
             'name' => 'Admin Posyandu',

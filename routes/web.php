@@ -34,6 +34,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('users/kaders', KaderController::class)->parameters(['kaders' => 'kader'])->names('kaders');
         Route::resource('users/parents', ParentUserController::class)->parameters(['parents' => 'parent'])->names('parents');
         Route::resource('users/puskesmas', PuskesmasUserController::class)->parameters(['puskesmas' => 'puskesmas'])->names('puskesmas');
+        Route::get('settings', [\App\Http\Controllers\SettingController::class, 'edit'])->name('settings.edit');
+        Route::patch('settings', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
     });
 
     // Kader and Admin Only Routes for Participant Management
