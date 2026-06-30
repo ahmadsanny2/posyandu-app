@@ -36,7 +36,6 @@ class SettingTest extends TestCase
             'address' => 'Kecamatan Melati, Kota Indah',
             'phone' => '081122334455',
             'email' => 'melati@posyandu.com',
-            'leader_name' => 'Ibu Sri Wahyuni',
         ]);
 
         $response->assertStatus(302); // Redirect back
@@ -47,7 +46,6 @@ class SettingTest extends TestCase
             'address' => 'Kecamatan Melati, Kota Indah',
             'phone' => '081122334455',
             'email' => 'melati@posyandu.com',
-            'leader_name' => 'Ibu Sri Wahyuni',
         ]);
     }
 

@@ -35,7 +35,6 @@ class SettingController extends Controller
             'address' => 'nullable|string',
             'phone' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255',
-            'leader_name' => 'nullable|string|max:255',
         ], [
             'posyandu_name.required' => 'Nama Posyandu wajib diisi.',
             'email.email' => 'Format email tidak valid.',

@@ -203,7 +203,7 @@
                 </p>
                 <p style="margin-top: 5px;">Ketua {{ $setting->posyandu_name }}</p>
                 <div style="height: 60px;"></div>
-                <p><strong>( <u>{{ $setting->leader_name ?? '____________________' }}</u> )</strong></p>
+                <p><strong>( ____________________ )</strong></p>
                 <p style="font-size: 9px; color: #64748b; margin-top: 5px;">NIP. Posyandu-{{ $year }}-{{ $monthName }}</p>
             </td>
         </tr>

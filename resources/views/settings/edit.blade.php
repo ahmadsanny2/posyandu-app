@@ -10,7 +10,7 @@
             </div>
         @endif
 
-        <x-card title="Pengaturan Identitas Posyandu" subtitle="Ubah nama, alamat, nomor kontak, dan informasi pimpinan posyandu">
+        <x-card title="Pengaturan Identitas Posyandu" subtitle="Ubah nama, alamat, dan nomor kontak posyandu">
             <form method="POST" action="{{ route('settings.update') }}" class="space-y-6">
                 @csrf
                 @method('PATCH')
@@ -20,13 +20,6 @@
                     <x-input-label for="posyandu_name" value="Nama Posyandu" />
                     <x-text-input id="posyandu_name" name="posyandu_name" type="text" class="mt-1 block w-full" :value="old('posyandu_name', $setting->posyandu_name)" required autofocus />
                     <x-input-error class="mt-2" :messages="$errors->get('posyandu_name')" />
-                </div>
-
-                <!-- Leader Name -->
-                <div>
-                    <x-input-label for="leader_name" value="Nama Pimpinan / Ketua Posyandu" />
-                    <x-text-input id="leader_name" name="leader_name" type="text" class="mt-1 block w-full" :value="old('leader_name', $setting->leader_name)" placeholder="Contoh: Dr. Herawati" />
-                    <x-input-error class="mt-2" :messages="$errors->get('leader_name')" />
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

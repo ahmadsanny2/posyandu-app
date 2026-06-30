@@ -11,6 +11,5 @@ class Setting extends Model
         'address',
         'phone',
         'email',
-        'leader_name',
     ];
 }
