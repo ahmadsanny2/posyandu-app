@@ -168,4 +168,53 @@ class PosyanduFeatureTest extends TestCase
             'medical_history' => 'Lahir caesar, tidak ada alergi.',
         ]);
     }
+
+    public function test_only_rsvp_present_participants_are_listed_on_schedule_show(): void
+    {
+        $kader = User::factory()->create(['role' => 'kader']);
+        
+        $parent1 = User::factory()->create(['role' => 'parent']);
+        $parent2 = User::factory()->create(['role' => 'parent']);
+        
+        $toddler1 = Toddler::create([
+            'user_id' => $parent1->id,
+            'name' => 'Budi RSVP',
+            'gender' => 'M',
+            'birth_date' => '2025-01-01',
+            'address' => 'Jl. Test 1',
+        ]);
+        
+        $toddler2 = Toddler::create([
+            'user_id' => $parent2->id,
+            'name' => 'Citra No RSVP',
+            'gender' => 'F',
+            'birth_date' => '2025-01-01',
+            'address' => 'Jl. Test 2',
+        ]);
+        
+        $schedule = Schedule::create([
+            'title' => 'Jadwal Balita Juni',
+            'target_type' => 'toddler',
+            'scheduled_at' => now()->addDays(2),
+            'location' => 'Pos RW 03',
+        ]);
+        
+        // Parent 1 RSVPs present
+        $schedule->attendances()->create([
+            'user_id' => $parent1->id,
+            'is_present' => true,
+        ]);
+        
+        // Parent 2 RSVPs absent (not present)
+        $schedule->attendances()->create([
+            'user_id' => $parent2->id,
+            'is_present' => false,
+        ]);
+
+        $response = $this->actingAs($kader)->get(route('schedules.show', $schedule->id));
+        
+        $response->assertStatus(200);
+        $response->assertSee('Budi RSVP');
+        $response->assertDontSee('Citra No RSVP');
+    }
 }

@@ -93,18 +93,27 @@ class ScheduleController extends Controller
         // Fetch RSVPs (attendances) for this schedule
         $attendances = $schedule->attendances()->with('user')->get();
 
+        // Get user IDs who have RSVP'd present for this schedule
+        $rsvpUserIds = $attendances->where('is_present', true)->pluck('user_id');
+
         // Get participants list based on target type
         $participants = [];
         $existingMeasurementIds = [];
         
         if ($schedule->target_type === 'toddler') {
-            $participants = \App\Models\Toddler::with('user')->get();
+            $participants = \App\Models\Toddler::with('user')
+                ->whereIn('user_id', $rsvpUserIds)
+                ->get();
             $existingMeasurementIds = $schedule->toddlerMeasurements()->pluck('toddler_id')->toArray();
         } elseif ($schedule->target_type === 'pregnant_woman') {
-            $participants = \App\Models\PregnantWoman::with('user')->get();
+            $participants = \App\Models\PregnantWoman::with('user')
+                ->whereIn('user_id', $rsvpUserIds)
+                ->get();
             $existingMeasurementIds = $schedule->pregnancyRecords()->pluck('pregnant_woman_id')->toArray();
         } elseif ($schedule->target_type === 'elderly') {
-            $participants = \App\Models\Elderly::with('user')->get();
+            $participants = \App\Models\Elderly::with('user')
+                ->whereIn('user_id', $rsvpUserIds)
+                ->get();
             $existingMeasurementIds = $schedule->elderlyRecords()->pluck('elderly_id')->toArray();
         }
 
