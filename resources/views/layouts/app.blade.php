@@ -24,7 +24,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
-    <body class="font-sans antialiased text-app-text bg-app-bg">
+    <body class="font-sans antialiased text-app-text bg-app-bg pb-20 md:pb-0">
         <div class="min-h-screen flex flex-col md:flex-row" x-data="{ mobileSidebarOpen: false }">
             <!-- Sidebar for Desktop & Mobile sliding drawer -->
             <div class="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 min-h-screen sticky top-0">
@@ -174,5 +174,38 @@
                 </main>
             </div>
         </div>
+
+        <!-- Mobile Bottom Navigation Bar (fixed bottom-0) -->
+        <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 h-16 flex items-center justify-around z-40 px-2 shadow-lg">
+            <!-- Beranda -->
+            <a href="{{ route('dashboard') }}" class="flex flex-col items-center justify-center flex-1 text-center py-2 transition-colors {{ request()->routeIs('dashboard') ? 'text-primary' : 'text-slate-400 hover:text-slate-600' }}">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                <span class="text-[10px] font-medium mt-1">Beranda</span>
+            </a>
+
+            <!-- Jadwal -->
+            <a href="{{ route('schedules.index') }}" class="flex flex-col items-center justify-center flex-1 text-center py-2 transition-colors {{ request()->routeIs('schedules.*') ? 'text-primary' : 'text-slate-400 hover:text-slate-600' }}">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="text-[10px] font-medium mt-1">Jadwal</span>
+            </a>
+
+            <!-- Artikel -->
+            <a href="{{ route('articles.index') }}" class="flex flex-col items-center justify-center flex-1 text-center py-2 transition-colors {{ request()->routeIs('articles.*') ? 'text-primary' : 'text-slate-400 hover:text-slate-600' }}">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                <span class="text-[10px] font-medium mt-1">Artikel</span>
+            </a>
+
+            <!-- Galeri -->
+            <a href="{{ route('galleries.index') }}" class="flex flex-col items-center justify-center flex-1 text-center py-2 transition-colors {{ request()->routeIs('galleries.*') ? 'text-primary' : 'text-slate-400 hover:text-slate-600' }}">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2-2v12a2 2 0 002 2z"/></svg>
+                <span class="text-[10px] font-medium mt-1">Galeri</span>
+            </a>
+
+            <!-- Menu (Sidebar Toggle) -->
+            <a href="#" @click.prevent="mobileSidebarOpen = true" class="flex flex-col items-center justify-center flex-1 text-center py-2 transition-colors text-slate-400 hover:text-primary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <span class="text-[10px] font-medium mt-1">Menu</span>
+            </a>
+        </nav>
     </body>
 </html>

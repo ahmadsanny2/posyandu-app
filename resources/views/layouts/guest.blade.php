@@ -19,7 +19,7 @@
 
 <body class="font-sans antialiased text-app-text bg-app-bg">
     <div class="min-h-screen flex flex-col justify-center items-center p-4 sm:p-6">
-        <div class="bg-white shadow-md rounded-2xl border border-slate-100 py-4">
+        <div class="bg-white shadow-md rounded-2xl border border-slate-100 p-4 sm:p-6">
             <div class="">
                 <a href="/" class="flex flex-col items-center gap-2">
                     <span class="text-3xl font-extrabold text-primary flex items-center gap-2">
