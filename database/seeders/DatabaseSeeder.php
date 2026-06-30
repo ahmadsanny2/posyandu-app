@@ -119,6 +119,7 @@ class DatabaseSeeder extends Seeder
             'target_type' => 'toddler',
             'scheduled_at' => '2026-05-10 08:00:00',
             'location' => 'Balai RW 01',
+            'description' => 'Pengukuran rutin tinggi badan, berat badan, lingkar kepala, pemberian vitamin A, dan konsultasi gizi balita.',
         ]);
 
         $scheduleMayBumil = Schedule::create([
@@ -126,6 +127,7 @@ class DatabaseSeeder extends Seeder
             'target_type' => 'pregnant_woman',
             'scheduled_at' => '2026-05-12 09:00:00',
             'location' => 'Poskesdes RW 01',
+            'description' => 'Pemeriksaan tensi darah, berat badan, lingkar lengan, detak jantung janin (DJJ), serta pembagian tablet tambah darah.',
         ]);
 
         $scheduleMayElderly = Schedule::create([
@@ -133,6 +135,7 @@ class DatabaseSeeder extends Seeder
             'target_type' => 'elderly',
             'scheduled_at' => '2026-05-14 08:30:00',
             'location' => 'Balai RW 01',
+            'description' => 'Pengecekan tensi darah, penimbangan berat badan, konsultasi asam urat & gula darah, serta senam lansia bersama.',
         ]);
 
         $scheduleJuneToddler = Schedule::create([
@@ -140,6 +143,7 @@ class DatabaseSeeder extends Seeder
             'target_type' => 'toddler',
             'scheduled_at' => '2026-06-10 08:00:00',
             'location' => 'Balai RW 01',
+            'description' => 'Pengukuran rutin tinggi badan, berat badan, lingkar kepala, dan imunisasi berkala.',
         ]);
 
         $scheduleJuneBumil = Schedule::create([
@@ -147,6 +151,7 @@ class DatabaseSeeder extends Seeder
             'target_type' => 'pregnant_woman',
             'scheduled_at' => '2026-06-12 09:00:00',
             'location' => 'Poskesdes RW 01',
+            'description' => 'Pemantauan kehamilan bulanan, konsultasi keluhan kehamilan, dan penyuluhan gizi ibu hamil.',
         ]);
 
         $scheduleJuneElderly = Schedule::create([
@@ -154,6 +159,7 @@ class DatabaseSeeder extends Seeder
             'target_type' => 'elderly',
             'scheduled_at' => '2026-06-14 08:30:00',
             'location' => 'Balai RW 01',
+            'description' => 'Pengecekan tensi darah, asam urat, gula darah, penyuluhan kesehatan lansia, dan senam pagi bersama.',
         ]);
 
         // 4. Seed Attendances (Pivot RSVPs)

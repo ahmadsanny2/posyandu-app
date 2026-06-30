@@ -34,6 +34,12 @@
                         {{ $schedule->location }}
                     </span>
                 </div>
+                @if($schedule->description)
+                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 text-sm text-slate-600 max-w-xl">
+                        <strong class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Rincian Kegiatan</strong>
+                        <p class="whitespace-pre-line leading-relaxed text-slate-700">{{ $schedule->description }}</p>
+                    </div>
+                @endif
             </div>
 
             <!-- RSVP Action (For Parent) -->

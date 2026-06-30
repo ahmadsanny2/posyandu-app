@@ -54,6 +54,13 @@
                     </div>
                 </div>
 
+                <!-- Description -->
+                <div class="mt-4">
+                    <x-input-label for="description" value="Detail Kegiatan / Rincian Acara (Opsional)" />
+                    <textarea id="description" name="description" rows="4" class="mt-1 block w-full rounded-xl border-slate-200 text-sm focus:border-primary focus:ring focus:ring-blue-100 transition-shadow" placeholder="Contoh: Pemeriksaan tumbuh kembang balita rutin, pembagian Makanan Tambahan (PMT) biskuit, serta imunisasi Campak. Harap membawa buku KIA.">{{ old('description', $schedule->description) }}</textarea>
+                    <x-input-error class="mt-2" :messages="$errors->get('description')" />
+                </div>
+
                 <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 mt-6">
                     <a href="{{ route('schedules.index') }}" class="px-4 py-2 border border-slate-200 text-slate-600 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-colors">Batal</a>
                     <x-primary-button>Perbarui Jadwal</x-primary-button>

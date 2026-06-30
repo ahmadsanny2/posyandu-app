@@ -26,6 +26,7 @@ class StoreScheduleRequest extends FormRequest
             'target_type' => 'required|in:toddler,pregnant_woman,elderly',
             'scheduled_at' => 'required|date|after_or_equal:today',
             'location' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ];
     }
 

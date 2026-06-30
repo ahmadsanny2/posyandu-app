@@ -26,6 +26,7 @@ class UpdateScheduleRequest extends FormRequest
             'target_type' => 'required|in:toddler,pregnant_woman,elderly',
             'scheduled_at' => 'required|date',
             'location' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ];
     }
 

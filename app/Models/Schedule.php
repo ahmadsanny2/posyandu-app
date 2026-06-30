@@ -14,6 +14,7 @@ class Schedule extends Model
         'target_type',
         'scheduled_at',
         'location',
+        'description',
     ];
 
     protected function casts(): array
