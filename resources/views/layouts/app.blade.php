@@ -102,32 +102,63 @@
                     </header>
                 @endisset
 
-                <!-- SweetAlert Notifications -->
-                @if (session('success'))
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
+                <!-- SweetAlert Notifications & Confirms -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Global Delete Confirmations
+                        const confirmForms = document.querySelectorAll('form[onsubmit*="confirm("]');
+                        confirmForms.forEach(form => {
+                            const onsubmitAttr = form.getAttribute('onsubmit');
+                            let message = "Apakah Anda yakin?";
+                            const match = onsubmitAttr.match(/confirm\(['"](.*)['"]\)/);
+                            if (match && match[1]) {
+                                message = match[1];
+                            }
+                            
+                            // Remove the inline handler
+                            form.removeAttribute('onsubmit');
+                            
+                            // Handle submit event
+                            form.addEventListener('submit', function (e) {
+                                e.preventDefault();
+                                Swal.fire({
+                                    title: 'Konfirmasi Hapus',
+                                    text: message,
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#ef4444',
+                                    cancelButtonColor: '#64748b',
+                                    confirmButtonText: 'Ya, Hapus!',
+                                    cancelButtonText: 'Batal'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        this.submit();
+                                    }
+                                });
+                            });
+                        });
+
+                        // Flash Success
+                        @if (session('success'))
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Sukses',
                                 text: "{{ session('success') }}",
                                 confirmButtonColor: '#2563eb',
                             });
-                        });
-                    </script>
-                @endif
+                        @endif
 
-                @if (session('error'))
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
+                        // Flash Error
+                        @if (session('error'))
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Kesalahan',
                                 text: "{{ session('error') }}",
                                 confirmButtonColor: '#2563eb',
                             });
-                        });
-                    </script>
-                @endif
+                        @endif
+                    });
+                </script>
 
                 <!-- Page Content -->
                 <main class="flex-1 p-6 sm:p-8 w-full max-w-7xl mx-auto">
