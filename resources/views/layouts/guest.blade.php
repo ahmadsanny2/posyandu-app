@@ -16,7 +16,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased text-app-text bg-app-bg">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+        <div class="min-h-screen flex flex-col justify-center items-center p-4 sm:p-6">
             <div>
                 <a href="/" class="flex flex-col items-center gap-2">
                     <span class="text-3xl font-extrabold text-primary flex items-center gap-2">
