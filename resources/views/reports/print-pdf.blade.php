@@ -2,122 +2,75 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Bulanan Posyandu - {{ $monthName }} {{ $year }}</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Helvetica', 'Arial', sans-serif;
             color: #1e293b;
-            line-height: 1.5;
-            padding: 40px;
-            background-color: #ffffff;
-        }
-        .no-print-header {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .btn-print {
-            background-color: #2563eb;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            font-weight: 600;
-            font-size: 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-print:hover {
-            background-color: #1d4ed8;
+            line-height: 1.4;
+            padding: 10px;
+            font-size: 12px;
         }
         .letterhead {
             text-align: center;
-            border-bottom: 3px double #1e293b;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            border-bottom: 2px solid #1e293b;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
         .letterhead h1 {
-            font-size: 22px;
+            font-size: 18px;
             margin: 0;
-            font-weight: 700;
+            font-weight: bold;
             text-transform: uppercase;
         }
         .letterhead p {
-            margin: 5px 0 0 0;
-            font-size: 13px;
-            color: #64748b;
+            margin: 3px 0 0 0;
+            font-size: 11px;
+            color: #475569;
         }
         .report-title {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         .report-title h2 {
-            font-size: 18px;
+            font-size: 14px;
             margin: 0;
-            font-weight: 700;
+            font-weight: bold;
+            text-transform: uppercase;
         }
         .report-title p {
-            margin: 5px 0 0 0;
-            font-size: 14px;
+            margin: 3px 0 0 0;
+            font-size: 11px;
             color: #475569;
         }
-        table {
+        table.data-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
-        th, td {
-            border: 1px solid #cbd5e1;
-            padding: 10px 12px;
-            font-size: 12px;
+        table.data-table th, table.data-table td {
+            border: 1px solid #94a3b8;
+            padding: 8px 10px;
+            font-size: 10px;
             text-align: left;
         }
-        th {
+        table.data-table th {
             background-color: #f1f5f9;
-            font-weight: 700;
+            font-weight: bold;
         }
-        .signature-block {
-            float: right;
-            text-align: center;
+        .signature-table {
+            width: 100%;
+            border: none;
             margin-top: 30px;
-            width: 250px;
-            font-size: 13px;
         }
-        .signature-space {
-            height: 75px;
-        }
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-            body {
-                padding: 0;
-            }
+        .signature-table td {
+            border: none;
+            font-size: 11px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-
-    <!-- Non-printable top action bar -->
-    <div class="no-print no-print-header">
-        <div>
-            <span style="font-weight: 600; font-size: 14px; color: #475569;">Laporan siap dicetak. Pastikan printer Anda terhubung.</span>
-        </div>
-        <button onclick="window.print()" class="btn-print">
-            <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.816l9.666-9.667a2.222 2.222 0 113.142 3.142L9.866 16.958a4.444 4.444 0 01-2.03 1.2L5 19l.842-2.836a4.444 4.444 0 011.203-2.03M6.72 13.816L5.25 15.25m1.47-1.434L9 15m-1.47-1.434l1.5-1.5m-3 3l.75-.75"/></svg>
-            Cetak Sekarang
-        </button>
-    </div>
 
     <!-- Official Letterhead (KOP Surat) -->
     <div class="letterhead">
@@ -138,11 +91,11 @@
 
     <!-- Data Table -->
     @if($records->isEmpty())
-        <div style="text-align: center; padding: 40px 0; color: #64748b; font-size: 14px; border: 1px dashed #cbd5e1; border-radius: 8px;">
+        <div style="text-align: center; padding: 30px; color: #64748b; font-size: 12px; border: 1px dashed #cbd5e1; border-radius: 8px;">
             Tidak ada rekam medis terdaftar untuk periode bulan ini.
         </div>
     @else
-        <table>
+        <table class="data-table">
             <thead>
                 @if($reportType === 'toddler')
                     <tr>
@@ -224,14 +177,19 @@
         </table>
     @endif
 
-    <!-- Signatures block -->
-    <div class="signature-block">
-        <p>Kota Sejahtera, {{ now()->translatedFormat('d F Y') }}</p>
-        <p>Ketua Posyandu RW</p>
-        <div class="signature-space"></div>
-        <p><strong>( ____________________ )</strong></p>
-        <p style="font-size: 11px; color: #64748b;">NIP. Posyandu-{{ $year }}-{{ $monthName }}</p>
-    </div>
+    <!-- Signatures table -->
+    <table class="signature-table">
+        <tr>
+            <td style="width: 60%;"></td>
+            <td style="width: 40%;">
+                <p>Kota Sejahtera, {{ now()->translatedFormat('d F Y') }}</p>
+                <p style="margin-top: 5px;">Ketua Posyandu RW</p>
+                <div style="height: 60px;"></div>
+                <p><strong>( ____________________ )</strong></p>
+                <p style="font-size: 9px; color: #64748b; margin-top: 5px;">NIP. Posyandu-{{ $year }}-{{ $monthName }}</p>
+            </td>
+        </tr>
+    </table>
 
 </body>
 </html>

@@ -79,6 +79,9 @@ class ReportController extends Controller
                 ->get();
         }
 
-        return view('reports.print', compact('records', 'reportType', 'monthName', 'year'));
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('reports.print-pdf', compact('records', 'reportType', 'monthName', 'year'))
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Laporan-Posyandu-' . $reportType . '-' . $monthName . '-' . $year . '.pdf');
     }
 }
