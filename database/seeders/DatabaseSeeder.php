@@ -59,6 +59,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'parent',
         ]);
 
+        $puskesmas = User::create([
+            'name' => 'Puskesmas Kebon Jeruk',
+            'email' => 'puskesmas@posyandu.com',
+            'password' => Hash::make('password'),
+            'role' => 'puskesmas',
+        ]);
+
         // 2. Seed Participant Profiles
         // Under Ibu Ani
         $toddlerBudi = Toddler::create([

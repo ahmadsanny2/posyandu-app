@@ -18,8 +18,8 @@ class ReportController extends Controller
      */
     public function index()
     {
-        if (!auth()->user()->isAdmin() && !auth()->user()->isKader()) {
-            abort(403, 'Halaman ini hanya dapat diakses oleh Admin atau Kader.');
+        if (!auth()->user()->isAdmin() && !auth()->user()->isKader() && !auth()->user()->isPuskesmas()) {
+            abort(403, 'Halaman ini hanya dapat diakses oleh Admin, Kader, atau Puskesmas.');
         }
 
         // Get months/years from existing records to populate filter dropdowns
@@ -38,8 +38,8 @@ class ReportController extends Controller
      */
     public function print(Request $request)
     {
-        if (!auth()->user()->isAdmin() && !auth()->user()->isKader()) {
-            abort(403, 'Halaman ini hanya dapat diakses oleh Admin atau Kader.');
+        if (!auth()->user()->isAdmin() && !auth()->user()->isKader() && !auth()->user()->isPuskesmas()) {
+            abort(403, 'Halaman ini hanya dapat diakses oleh Admin, Kader, atau Puskesmas.');
         }
 
         $request->validate([

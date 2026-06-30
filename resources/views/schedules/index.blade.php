@@ -7,16 +7,20 @@
         <!-- Control Panel & Search -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <!-- Add Button (Admin/Kader only) -->
-            <div>
-                @if(auth()->user()->isAdmin() || auth()->user()->isKader())
+            @can('create', App\Models\Schedule::class)
+                <div>
                     <a href="{{ route('schedules.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary hover:bg-blue-700 text-white font-semibold rounded-xl text-sm transition-colors shadow-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                         Buat Jadwal Baru
                     </a>
-                @else
-                    <span class="text-sm text-slate-500 font-medium">Lihat dan kirim RSVP kehadiran untuk jadwal kegiatan di bawah ini.</span>
+                </div>
+            @else
+                @if(auth()->user()->isParent())
+                    <div>
+                        <span class="text-sm text-slate-500 font-medium">Lihat dan kirim RSVP kehadiran untuk jadwal kegiatan di bawah ini.</span>
+                    </div>
                 @endif
-            </div>
+            @endcan
 
             <!-- Search and Filter Form -->
             <form method="GET" action="{{ route('schedules.index') }}" class="flex flex-col sm:flex-row gap-3 flex-1 max-w-lg">
@@ -84,15 +88,18 @@
                                     </td>
                                     <td class="px-6 py-4 text-slate-500">{{ $schedule->location }}</td>
                                     <td class="px-6 py-4 text-right">
-                                        <!-- If Admin/Kader, show Edit/Delete -->
-                                        @if(auth()->user()->isAdmin() || auth()->user()->isKader())
+                                        <!-- If Admin/Kader/Puskesmas, show Detail (and Edit/Delete if authorized) -->
+                                        @if(auth()->user()->isAdmin() || auth()->user()->isKader() || auth()->user()->isPuskesmas())
                                             <div class="flex items-center justify-end gap-2">
-                                                <a href="{{ route('schedules.show', $schedule->id) }}" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors" title="Detail & Rekam">
-                                                    Detail & Rekam
+                                                <a href="{{ route('schedules.show', $schedule->id) }}" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors" title="Detail">
+                                                    {{ auth()->user()->isPuskesmas() ? 'Detail' : 'Detail & Rekam' }}
                                                 </a>
+                                                @can('update', $schedule)
                                                 <a href="{{ route('schedules.edit', $schedule->id) }}" class="p-1.5 hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded-lg transition-colors" title="Edit">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                                 </a>
+                                                @endcan
+                                                @can('delete', $schedule)
                                                 <form action="{{ route('schedules.destroy', $schedule->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')">
                                                     @csrf
                                                     @method('DELETE')
@@ -100,8 +107,9 @@
                                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                                     </button>
                                                 </form>
+                                                @endcan
                                             </div>
-                                        @else
+                                        @elseif(auth()->user()->isParent())
                                             <!-- Parent: RSVP section -->
                                             <div class="flex items-center justify-end gap-3">
                                                 @php

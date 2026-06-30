@@ -14,6 +14,7 @@ use App\Http\Controllers\ElderlyRecordController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PuskesmasUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,10 +30,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Admin Only Routes
     Route::middleware('role:admin')->group(function () {
         Route::resource('users/kaders', KaderController::class)->parameters(['kaders' => 'kader'])->names('kaders');
         Route::resource('users/parents', ParentUserController::class)->parameters(['parents' => 'parent'])->names('parents');
+        Route::resource('users/puskesmas', PuskesmasUserController::class)->parameters(['puskesmas' => 'puskesmas'])->names('puskesmas');
     });
 
     // Kader and Admin Only Routes for Participant Management
@@ -55,8 +56,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('schedules/{schedule}/elderlies/{elderly}/record', [ElderlyRecordController::class, 'create'])->name('elderlies.record.create');
         Route::post('elderlies/record', [ElderlyRecordController::class, 'store'])->name('elderlies.record.store');
+    });
 
-        // Reports (Laporan) - Kader/Admin Only
+    // Reports (Laporan) - Admin, Kader, & Puskesmas
+    Route::middleware('role:admin,kader,puskesmas')->group(function () {
         Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
         Route::get('reports/print', [ReportController::class, 'print'])->name('reports.print');
     });

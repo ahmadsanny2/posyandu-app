@@ -21,7 +21,7 @@ class ToddlerPolicy
      */
     public function view(User $user, Toddler $toddler): bool
     {
-        if ($user->isAdmin() || $user->isKader()) {
+        if ($user->isAdmin() || $user->isKader() || $user->isPuskesmas()) {
             return true;
         }
 
@@ -33,7 +33,7 @@ class ToddlerPolicy
      */
     public function create(User $user): bool
     {
-        return true; // Anyone can register a toddler (parent can register their kid, kader/admin can register for anyone)
+        return $user->isAdmin() || $user->isKader() || $user->isParent();
     }
 
     /**

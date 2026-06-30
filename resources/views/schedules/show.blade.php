@@ -56,9 +56,9 @@
             @endif
         </div>
 
-        @if(auth()->user()->isAdmin() || auth()->user()->isKader())
+        @if(auth()->user()->isAdmin() || auth()->user()->isKader() || auth()->user()->isPuskesmas())
             <!-- Participants Attendance/Medical Records input (Managerial view) -->
-            <x-card title="Pengisian Rekam Medis Kegiatan" subtitle="Catat data pemeriksaan fisik peserta posyandu yang hadir">
+            <x-card title="Pengisian Rekam Medis Kegiatan" :subtitle="auth()->user()->isPuskesmas() ? 'Daftar rekam medis pemeriksaan fisik peserta posyandu' : 'Catat data pemeriksaan fisik peserta posyandu yang hadir'">
                 @if($participants->isEmpty())
                     <div class="py-8 text-center text-slate-400 text-sm">
                         Belum ada peserta terdaftar untuk sasaran kegiatan ini.
@@ -71,7 +71,9 @@
                                     <th class="px-6 py-4">Nama Peserta</th>
                                     <th class="px-6 py-4">Keluarga Penanggung Jawab</th>
                                     <th class="px-6 py-4 text-center">Status Rekam</th>
-                                    <th class="px-6 py-4 text-right">Tindakan</th>
+                                    @if(auth()->user()->isAdmin() || auth()->user()->isKader())
+                                        <th class="px-6 py-4 text-right">Tindakan</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 text-sm">
@@ -93,25 +95,27 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td class="px-6 py-4 text-right">
-                                            @if($hasMeasured)
-                                                <span class="text-xs text-slate-400">Data Terrekam</span>
-                                            @else
-                                                @if($schedule->target_type === 'toddler')
-                                                    <a href="{{ route('toddlers.measure.create', [$schedule->id, $participant->id]) }}" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition-colors">
-                                                        Input BB/TB
-                                                    </a>
-                                                @elseif($schedule->target_type === 'pregnant_woman')
-                                                    <a href="{{ route('pregnant-women.record.create', [$schedule->id, $participant->id]) }}" class="px-3 py-1.5 bg-pink-600 hover:bg-pink-700 text-white rounded-lg text-xs font-bold transition-colors">
-                                                        Input Rekam Bumil
-                                                    </a>
-                                                @elseif($schedule->target_type === 'elderly')
-                                                    <a href="{{ route('elderlies.record.create', [$schedule->id, $participant->id]) }}" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-colors">
-                                                        Input Rekam Lansia
-                                                    </a>
+                                        @if(auth()->user()->isAdmin() || auth()->user()->isKader())
+                                            <td class="px-6 py-4 text-right">
+                                                @if($hasMeasured)
+                                                    <span class="text-xs text-slate-400">Data Terrekam</span>
+                                                @else
+                                                    @if($schedule->target_type === 'toddler')
+                                                        <a href="{{ route('toddlers.measure.create', [$schedule->id, $participant->id]) }}" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition-colors">
+                                                            Input BB/TB
+                                                        </a>
+                                                    @elseif($schedule->target_type === 'pregnant_woman')
+                                                        <a href="{{ route('pregnant-women.record.create', [$schedule->id, $participant->id]) }}" class="px-3 py-1.5 bg-pink-600 hover:bg-pink-700 text-white rounded-lg text-xs font-bold transition-colors">
+                                                            Input Rekam Bumil
+                                                        </a>
+                                                    @elseif($schedule->target_type === 'elderly')
+                                                        <a href="{{ route('elderlies.record.create', [$schedule->id, $participant->id]) }}" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-colors">
+                                                            Input Rekam Lansia
+                                                        </a>
+                                                    @endif
                                                 @endif
-                                            @endif
-                                        </td>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

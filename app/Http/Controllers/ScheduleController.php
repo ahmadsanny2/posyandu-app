@@ -60,6 +60,8 @@ class ScheduleController extends Controller
      */
     public function store(StoreScheduleRequest $request)
     {
+        Gate::authorize('create', Schedule::class);
+
         Schedule::create($request->validated());
 
         return redirect()->route('schedules.index')->with('success', 'Jadwal kegiatan berhasil ditambahkan.');

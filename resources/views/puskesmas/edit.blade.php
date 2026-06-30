@@ -1,0 +1,52 @@
+<x-app-layout>
+    <x-slot name="header">
+        Ubah Data Puskesmas
+    </x-slot>
+
+    <div class="space-y-6">
+        <div class="mb-4">
+            <a href="{{ route('puskesmas.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1.5">&larr; Kembali ke Daftar</a>
+        </div>
+
+        <x-card title="Ubah Data Puskesmas" subtitle="Sesuaikan rincian akun: {{ $puskesmas->name }}">
+            <form method="POST" action="{{ route('puskesmas.update', $puskesmas->id) }}" class="space-y-6">
+                @csrf
+                @method('PATCH')
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Left Column -->
+                    <div class="space-y-4">
+                        <!-- Name -->
+                        <div>
+                            <x-input-label for="name" value="Nama Puskesmas" />
+                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $puskesmas->name)" required autofocus />
+                            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <x-input-label for="email" value="Alamat Email" />
+                            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $puskesmas->email)" required />
+                            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="space-y-4">
+                        <!-- Password -->
+                        <div>
+                            <x-input-label for="password" value="Kata Sandi Baru (Kosongkan jika tidak diubah)" />
+                            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" />
+                            <x-input-error class="mt-2" :messages="$errors->get('password')" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 mt-6">
+                    <a href="{{ route('puskesmas.index') }}" class="px-4 py-2 border border-slate-200 text-slate-600 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-colors">Batal</a>
+                    <x-primary-button>Perbarui Akun</x-primary-button>
+                </div>
+            </form>
+        </x-card>
+    </div>
+</x-app-layout>

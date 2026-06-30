@@ -20,7 +20,7 @@ class ElderlyPolicy
      */
     public function view(User $user, Elderly $elderly): bool
     {
-        if ($user->isAdmin() || $user->isKader()) {
+        if ($user->isAdmin() || $user->isKader() || $user->isPuskesmas()) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class ElderlyPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->isAdmin() || $user->isKader() || $user->isParent();
     }
 
     /**

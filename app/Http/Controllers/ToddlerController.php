@@ -44,6 +44,8 @@ class ToddlerController extends Controller
      */
     public function create(Request $request)
     {
+        Gate::authorize('create', Toddler::class);
+
         $parents = User::where('role', 'parent')->get();
         return view('toddlers.create', compact('parents'));
     }
@@ -53,6 +55,8 @@ class ToddlerController extends Controller
      */
     public function store(StoreToddlerRequest $request)
     {
+        Gate::authorize('create', Toddler::class);
+
         $validated = $request->validated();
 
         if ($request->user()->isParent()) {

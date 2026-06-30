@@ -40,6 +40,8 @@ class ElderlyController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Elderly::class);
+
         $parents = User::where('role', 'parent')->get();
         return view('elderlies.create', compact('parents'));
     }
@@ -49,6 +51,8 @@ class ElderlyController extends Controller
      */
     public function store(StoreElderlyRequest $request)
     {
+        Gate::authorize('create', Elderly::class);
+
         $validated = $request->validated();
 
         if ($request->user()->isParent()) {

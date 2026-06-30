@@ -40,6 +40,8 @@ class PregnantWomanController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', PregnantWoman::class);
+
         $parents = User::where('role', 'parent')->get();
         return view('pregnant-women.create', compact('parents'));
     }
@@ -49,6 +51,8 @@ class PregnantWomanController extends Controller
      */
     public function store(StorePregnantWomanRequest $request)
     {
+        Gate::authorize('create', PregnantWoman::class);
+
         $validated = $request->validated();
 
         if ($request->user()->isParent()) {

@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->role === 'parent';
     }
 
+    public function isPuskesmas(): bool
+    {
+        return $this->role === 'puskesmas';
+    }
+
     // Relationships
     public function toddlers()
     {
