@@ -4,11 +4,6 @@
     </x-slot>
 
     <div class="max-w-3xl space-y-6">
-        @if (session('success'))
-            <div class="p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm font-semibold rounded-2xl shadow-sm">
-                {{ session('success') }}
-            </div>
-        @endif
 
         <x-card title="Pengaturan Identitas Posyandu" subtitle="Ubah nama, alamat, dan nomor kontak posyandu">
             <form method="POST" action="{{ route('settings.update') }}" class="space-y-6">

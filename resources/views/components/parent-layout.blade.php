@@ -14,6 +14,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body class="font-sans antialiased text-app-text bg-app-bg pb-20 md:pb-0">
         <div class="min-h-screen flex flex-col md:flex-row">
@@ -90,53 +91,31 @@
                     </header>
                 @endisset
 
-                <!-- Flash Notifications (Toast Style) -->
-                @if (session('success') || session('error'))
-                    <div 
-                        x-data="{ show: true }" 
-                        x-show="show" 
-                        x-init="setTimeout(() => show = false, 5000)"
-                        x-transition:enter="transition ease-out duration-300 transform"
-                        x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
-                        x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0"
-                        x-transition:leave="transition ease-in duration-200"
-                        x-transition:leave-start="opacity-100"
-                        x-transition:leave-end="opacity-0"
-                        class="fixed bottom-20 right-5 z-50 max-w-md w-full sm:w-80"
-                        style="display: none;"
-                    >
-                        @if (session('success'))
-                            <div class="flex items-center gap-3 bg-white border border-emerald-100 shadow-xl shadow-emerald-100/10 rounded-2xl p-4 pr-10 relative overflow-hidden">
-                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-emerald-500"></div>
-                                <div class="w-7 h-7 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0 ml-1">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sukses</p>
-                                    <p class="text-xs font-semibold text-slate-700 mt-0.5 leading-snug">{{ session('success') }}</p>
-                                </div>
-                                <button @click="show = false" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 transition-colors">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-                                </button>
-                            </div>
-                        @endif
+                <!-- SweetAlert Notifications -->
+                @if (session('success'))
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses',
+                                text: "{{ session('success') }}",
+                                confirmButtonColor: '#2563eb',
+                            });
+                        });
+                    </script>
+                @endif
 
-                        @if (session('error'))
-                            <div class="flex items-center gap-3 bg-white border border-red-100 shadow-xl shadow-red-100/10 rounded-2xl p-4 pr-10 relative overflow-hidden">
-                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-red-500"></div>
-                                <div class="w-7 h-7 rounded-full bg-red-50 flex items-center justify-center text-red-600 shrink-0 ml-1">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kesalahan</p>
-                                    <p class="text-xs font-semibold text-slate-700 mt-0.5 leading-snug">{{ session('error') }}</p>
-                                </div>
-                                <button @click="show = false" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 transition-colors">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-                                </button>
-                            </div>
-                        @endif
-                    </div>
+                @if (session('error'))
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Kesalahan',
+                                text: "{{ session('error') }}",
+                                confirmButtonColor: '#2563eb',
+                            });
+                        });
+                    </script>
                 @endif
 
                 <!-- Page Content -->
