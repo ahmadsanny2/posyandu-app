@@ -45,9 +45,11 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        $data['slug'] = \Illuminate\Support\Str::slug($data['title']);
 
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('articles', 'public');
+            $data['thumbnail_path'] = $request->file('image')->store('articles', 'public');
         }
 
         Article::create($data);
@@ -80,13 +82,14 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         $data = $request->validated();
+        $data['slug'] = \Illuminate\Support\Str::slug($data['title']);
 
         if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($article->image_path) {
-                Storage::disk('public')->delete($article->image_path);
+            // Delete old thumbnail if exists
+            if ($article->thumbnail_path) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($article->thumbnail_path);
             }
-            $data['image_path'] = $request->file('image')->store('articles', 'public');
+            $data['thumbnail_path'] = $request->file('image')->store('articles', 'public');
         }
 
         $article->update($data);
@@ -103,8 +106,8 @@ class ArticleController extends Controller
             abort(403, 'Aksi ini hanya diperbolehkan untuk Admin.');
         }
 
-        if ($article->image_path) {
-            Storage::disk('public')->delete($article->image_path);
+        if ($article->thumbnail_path) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($article->thumbnail_path);
         }
 
         $article->delete();
