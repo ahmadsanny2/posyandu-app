@@ -111,17 +111,16 @@
                                     <tr class="border-b border-slate-100 text-xs font-bold text-slate-400 uppercase">
                                         <th class="pb-3">Kegiatan</th>
                                         <th class="pb-3">Sasaran</th>
-                                        <th class="pb-3">Tanggal & Waktu</th>
+                                        <th class="pb-3">Tanggal &amp; Waktu</th>
                                         <th class="pb-3">Lokasi</th>
+                                        <th class="pb-3 text-right">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-50 text-sm">
                                     @foreach($schedules as $schedule)
                                         <tr>
                                             <td class="py-3 font-semibold text-slate-800">
-                                                <a href="{{ route('schedules.show', $schedule->id) }}" class="hover:text-primary transition-colors">
-                                                    {{ $schedule->title }}
-                                                </a>
+                                                {{ $schedule->title }}
                                             </td>
                                             <td class="py-3">
                                                 <span class="px-2.5 py-1 rounded-full text-xs font-medium 
@@ -136,6 +135,11 @@
                                             </td>
                                             <td class="py-3 text-slate-500">{{ $schedule->scheduled_at->translatedFormat('d F Y, H:i') }} WIB</td>
                                             <td class="py-3 text-slate-500">{{ $schedule->location }}</td>
+                                            <td class="py-3 text-right">
+                                                <a href="{{ route('schedules.show', $schedule->id) }}" class="inline-flex items-center px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-xs transition-colors">
+                                                    Detail
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
