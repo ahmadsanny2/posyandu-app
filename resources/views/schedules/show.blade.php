@@ -55,7 +55,17 @@
                                 Anda menyatakan: <strong class="{{ $myRsvp->is_present ? 'text-emerald-600' : 'text-red-600' }}">{{ $myRsvp->is_present ? 'Hadir' : 'Absen' }}</strong>
                             </span>
                         @else
-                            <span class="text-xs text-slate-500">Belum mengirim konfirmasi.</span>
+                            <form method="POST" action="{{ route('schedules.rsvp', $schedule->id) }}" class="flex items-center gap-1.5">
+                                @csrf
+                                <input type="hidden" name="notes" value="RSVP via Web Detail">
+                                
+                                <button type="submit" name="is_present" value="1" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-xs font-bold transition-colors">
+                                    Hadir
+                                </button>
+                                <button type="submit" name="is_present" value="0" class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white rounded text-xs font-bold transition-colors">
+                                    Absen
+                                </button>
+                            </form>
                         @endif
                     </div>
                 </div>
