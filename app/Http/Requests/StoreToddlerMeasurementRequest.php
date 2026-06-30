@@ -28,6 +28,7 @@ class StoreToddlerMeasurementRequest extends FormRequest
             'height_cm' => 'required|numeric|min:20|max:200',
             'head_circumference_cm' => 'required|numeric|min:10|max:100',
             'immunization_type' => 'nullable|string|max:255',
+            'action_notes' => 'nullable|string',
         ];
     }
 

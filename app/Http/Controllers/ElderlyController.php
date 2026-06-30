@@ -16,6 +16,8 @@ class ElderlyController extends Controller
      */
     public function index(Request $request)
     {
+        Gate::authorize('viewAny', Elderly::class);
+
         $query = Elderly::query();
 
         if ($request->user()->isParent()) {

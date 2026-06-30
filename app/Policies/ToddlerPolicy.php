@@ -12,8 +12,7 @@ class ToddlerPolicy
      */
     public function viewAny(User $user): bool
     {
-        // Admin, Kader can view all. Parents can view their dashboard (handled in Controller query).
-        return true;
+        return $user->isAdmin() || $user->isKader() || $user->isPuskesmas();
     }
 
     /**

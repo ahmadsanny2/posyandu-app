@@ -12,7 +12,7 @@ class ElderlyPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->isAdmin() || $user->isKader() || $user->isPuskesmas();
     }
 
     /**

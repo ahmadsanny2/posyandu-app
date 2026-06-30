@@ -16,6 +16,7 @@ class ToddlerMeasurement extends Model
         'height_cm',
         'head_circumference_cm',
         'immunization_type',
+        'action_notes',
     ];
 
     public function toddler()

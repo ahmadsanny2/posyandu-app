@@ -70,7 +70,7 @@
                                 <tr class="border-b border-slate-100 text-xs font-bold text-slate-400 uppercase bg-slate-50/75">
                                     <th class="px-6 py-4">Nama Peserta</th>
                                     <th class="px-6 py-4">Keluarga Penanggung Jawab</th>
-                                    <th class="px-6 py-4 text-center">Status Rekam</th>
+                                    <th class="px-6 py-4 text-center">Kehadiran &amp; Pemeriksaan</th>
                                     @if(auth()->user()->isAdmin() || auth()->user()->isKader())
                                         <th class="px-6 py-4 text-right">Tindakan</th>
                                     @endif
@@ -87,11 +87,11 @@
                                         <td class="px-6 py-4 text-center">
                                             @if($hasMeasured)
                                                 <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-100 text-xs font-semibold rounded-full">
-                                                    Selesai Diperiksa
+                                                    Hadir &amp; Diperiksa
                                                 </span>
                                             @else
                                                 <span class="px-2.5 py-1 bg-amber-50 text-amber-700 border border-amber-100 text-xs font-semibold rounded-full">
-                                                    Belum Diperiksa
+                                                    Belum Hadir / Belum Diperiksa
                                                 </span>
                                             @endif
                                         </td>

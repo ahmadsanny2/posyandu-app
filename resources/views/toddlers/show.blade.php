@@ -5,7 +5,7 @@
 
     <div class="space-y-6 max-w-5xl">
         <div class="mb-4">
-            <a href="{{ route('toddlers.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1.5">&larr; Kembali ke Daftar</a>
+            <a href="{{ auth()->user()->isParent() ? route('dashboard') : route('toddlers.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1.5">&larr; Kembali</a>
         </div>
 
         <!-- Participant Profile Summary Card -->
@@ -68,6 +68,20 @@
                         <canvas id="headCircumferenceChart"></canvas>
                     </div>
                 </x-card>
+            </div>
+            
+            <!-- Growth Chart Legend and Guidelines for Parents -->
+            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5 text-sm text-slate-700 space-y-2 shadow-sm">
+                <h4 class="font-bold text-blue-800 flex items-center gap-1.5">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Panduan Membaca Grafik Tumbuh Kembang Balita
+                </h4>
+                <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
+                    <li><strong>Garis Biru (Berat Badan):</strong> Menunjukkan tren kenaikan berat badan anak Anda. Berat badan ideal naik secara bertahap setiap bulan seiring pertambahan usia.</li>
+                    <li><strong>Garis Merah Muda (Tinggi Badan):</strong> Menunjukkan pertambahan tinggi badan anak Anda. Tinggi badan yang naik stabil menunjukkan asupan gizi makro yang baik.</li>
+                    <li><strong>Garis Hijau (Lingkar Kepala):</strong> Menunjukkan perkembangan otak anak. Lingkar kepala idealnya bertambah secara proporsional.</li>
+                    <li><strong>Tindakan Mandiri:</strong> Jika grafik menunjukkan garis yang mendatar atau menurun pada 2 kali pemeriksaan berturut-turut, harap hubungi Kader Posyandu untuk berkonsultasi atau periksa langsung ke Puskesmas.</li>
+                </ul>
             </div>
             
             <!-- Load Chart.js CDN -->
@@ -190,6 +204,7 @@
                                 <th class="px-5 py-3.5 text-center">Tinggi Badan</th>
                                 <th class="px-5 py-3.5 text-center">Lingkar Kepala</th>
                                 <th class="px-5 py-3.5">Imunisasi</th>
+                                <th class="px-5 py-3.5">Tindak Lanjut / Saran Gizi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 text-sm">
@@ -212,6 +227,9 @@
                                         @else
                                             <span class="text-slate-400 text-xs">-</span>
                                         @endif
+                                    </td>
+                                    <td class="px-5 py-3.5 text-slate-600 text-xs font-medium">
+                                        {{ $record->action_notes ?? 'Tidak ada catatan' }}
                                     </td>
                                 </tr>
                             @endforeach

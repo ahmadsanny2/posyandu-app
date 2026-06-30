@@ -16,6 +16,8 @@ class PregnantWomanController extends Controller
      */
     public function index(Request $request)
     {
+        Gate::authorize('viewAny', PregnantWoman::class);
+
         $query = PregnantWoman::query();
 
         if ($request->user()->isParent()) {

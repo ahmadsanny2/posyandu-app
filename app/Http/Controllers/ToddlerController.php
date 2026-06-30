@@ -16,6 +16,8 @@ class ToddlerController extends Controller
      */
     public function index(Request $request)
     {
+        Gate::authorize('viewAny', Toddler::class);
+
         $query = Toddler::query();
 
         if ($request->user()->isParent()) {
