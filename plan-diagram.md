@@ -419,18 +419,19 @@ Menggambarkan alur masuk pengguna ke dalam sistem posyandu.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor User as Pengguna
     participant Boundary as v_login
     participant Control as c_auth
     participant Entity as m_user
 
-    User->>Boundary: Masukkan email & password
-    User->>Boundary: klik tombol Login
-    Boundary->>Control: login()
-    Control->>Entity: get_by_id()
-    Entity-->>Control: data user & hash password
-    Control->>Control: Verifikasi password
-    Control->>Boundary: Redirect ke Dashboard (Success)
+    User->>Boundary: 1: Masukkan email & password
+    User->>Boundary: 2: klik tombol Login
+    Boundary->>Control: 3: login()
+    Control->>Entity: 4: get_by_id()
+    Entity-->>Control: 5: data user & hash password
+    Control->>Control: 6: Verifikasi password
+    Control->>Boundary: 7: Redirect ke Dashboard (Success)
 ```
 
 ---
@@ -440,19 +441,20 @@ Menggambarkan alur pendaftaran data balita oleh Kader atau Orang Tua.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor Kader as Kader / Parent
     participant Boundary as v_tambah_toddler
     participant Control as c_toddler
     participant Entity as m_toddler
 
-    Kader->>Control: create()
-    Control->>Boundary: create()
-    Kader->>Boundary: Isi data balita (Nama, Tgl Lahir, dsb)
-    Kader->>Boundary: klik tombol Simpan
-    Boundary->>Control: store()
-    Control->>Entity: insert()
-    Entity-->>Control: success
-    Control->>Control: index() (Redirect ke daftar balita)
+    Kader->>Control: 1: create()
+    Control->>Boundary: 2: create()
+    Kader->>Boundary: 3: Isi data balita (Nama, Tgl Lahir, dsb)
+    Kader->>Boundary: 4: klik tombol Simpan
+    Boundary->>Control: 5: store()
+    Control->>Entity: 6: insert()
+    Entity-->>Control: 7: success
+    Control->>Control: 8: index() (Redirect ke daftar balita)
 ```
 
 ---
@@ -462,21 +464,22 @@ Menggambarkan alur pembaruan data balita yang sudah terdaftar.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor Kader as Kader / Parent
     participant Boundary as v_edit_toddler
     participant Control as c_toddler
     participant Entity as m_toddler
 
-    Kader->>Control: edit()
-    Control->>Entity: get_by_id()
-    Entity-->>Control: data balita
-    Control->>Boundary: edit() (Tampilkan form terisi)
-    Kader->>Boundary: Ubah data balita
-    Kader->>Boundary: klik tombol Perbarui
-    Boundary->>Control: update()
-    Control->>Entity: update()
-    Entity-->>Control: success
-    Control->>Control: index() (Redirect ke daftar balita)
+    Kader->>Control: 1: edit()
+    Control->>Entity: 2: get_by_id()
+    Entity-->>Control: 3: data balita
+    Control->>Boundary: 4: edit() (Tampilkan form terisi)
+    Kader->>Boundary: 5: Ubah data balita
+    Kader->>Boundary: 6: klik tombol Perbarui
+    Boundary->>Control: 7: update()
+    Control->>Entity: 8: update()
+    Entity-->>Control: 9: success
+    Control->>Control: 10: index() (Redirect ke daftar balita)
 ```
 
 ---
@@ -486,17 +489,18 @@ Menggambarkan alur penghapusan data balita dari sistem.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor Kader as Kader / Parent
     participant Boundary as v_tampil_toddler
     participant Control as c_toddler
     participant Entity as m_toddler
 
-    Kader->>Boundary: klik tombol Hapus
-    Boundary->>Control: destroy()
-    Control->>Entity: get_by_id()
-    Control->>Entity: delete()
-    Entity-->>Control: success
-    Control->>Control: index() (Redirect ke daftar balita)
+    Kader->>Boundary: 1: klik tombol Hapus
+    Boundary->>Control: 2: destroy()
+    Control->>Entity: 3: get_by_id()
+    Control->>Entity: 4: delete()
+    Entity-->>Control: 5: success
+    Control->>Control: 6: index() (Redirect ke daftar balita)
 ```
 
 ---
@@ -506,19 +510,20 @@ Menggambarkan alur pendaftaran Ibu Hamil baru ke dalam sistem.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor Kader as Kader
     participant Boundary as v_tambah_pregnant
     participant Control as c_pregnant
     participant Entity as m_pregnant_woman
 
-    Kader->>Control: create()
-    Control->>Boundary: create()
-    Kader->>Boundary: Isi data Ibu Hamil
-    Kader->>Boundary: klik tombol Simpan
-    Boundary->>Control: store()
-    Control->>Entity: insert()
-    Entity-->>Control: success
-    Control->>Control: index() (Redirect)
+    Kader->>Control: 1: create()
+    Control->>Boundary: 2: create()
+    Kader->>Boundary: 3: Isi data Ibu Hamil
+    Kader->>Boundary: 4: klik tombol Simpan
+    Boundary->>Control: 5: store()
+    Control->>Entity: 6: insert()
+    Entity-->>Control: 7: success
+    Control->>Control: 8: index() (Redirect)
 ```
 
 ---
@@ -528,19 +533,20 @@ Menggambarkan alur pendaftaran Lansia baru ke dalam sistem.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor Kader as Kader
     participant Boundary as v_tambah_elderly
     participant Control as c_elderly
     participant Entity as m_elderly
 
-    Kader->>Control: create()
-    Control->>Boundary: create()
-    Kader->>Boundary: Isi data Lansia
-    Kader->>Boundary: klik tombol Simpan
-    Boundary->>Control: store()
-    Control->>Entity: insert()
-    Entity-->>Control: success
-    Control->>Control: index() (Redirect)
+    Kader->>Control: 1: create()
+    Control->>Boundary: 2: create()
+    Kader->>Boundary: 3: Isi data Lansia
+    Kader->>Boundary: 4: klik tombol Simpan
+    Boundary->>Control: 5: store()
+    Control->>Entity: 6: insert()
+    Entity-->>Control: 7: success
+    Control->>Control: 8: index() (Redirect)
 ```
 
 ---
@@ -550,17 +556,18 @@ Menggambarkan alur Orang Tua melakukan RSVP kehadiran pada jadwal kegiatan.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor Parent as Orang Tua (Parent)
     participant Boundary as v_tampil_schedule
     participant Control as c_schedule
     participant Entity as m_attendance
 
-    Parent->>Boundary: Pilih opsi kehadiran (Hadir/Tidak) & Catatan
-    Parent->>Boundary: klik tombol RSVP
-    Boundary->>Control: rsvp()
-    Control->>Entity: updateOrCreate()
-    Entity-->>Control: success
-    Control->>Boundary: Tampilkan pesan RSVP Berhasil
+    Parent->>Boundary: 1: Pilih opsi kehadiran (Hadir/Tidak) & Catatan
+    Parent->>Boundary: 2: klik tombol RSVP
+    Boundary->>Control: 3: rsvp()
+    Control->>Entity: 4: updateOrCreate()
+    Entity-->>Control: 5: success
+    Control->>Boundary: 6: Tampilkan pesan RSVP Berhasil
 ```
 
 ---
@@ -570,19 +577,20 @@ Menggambarkan alur pencatatan pengukuran fisik dan imunisasi balita saat kegiata
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor Kader as Kader / Admin
     participant Boundary as v_tambah_toddler_measure
     participant Control as c_toddler_measurement
     participant Entity as m_toddler_measurement
 
-    Kader->>Control: create()
-    Control->>Boundary: create()
-    Kader->>Boundary: Isi berat, tinggi, lingkar kepala, jenis imunisasi
-    Kader->>Boundary: klik tombol Simpan
-    Boundary->>Control: store()
-    Control->>Entity: insert()
-    Entity-->>Control: success
-    Control->>Control: Redirect ke Detail Jadwal
+    Kader->>Control: 1: create()
+    Control->>Boundary: 2: create()
+    Kader->>Boundary: 3: Isi berat, tinggi, lingkar kepala, jenis imunisasi
+    Kader->>Boundary: 4: klik tombol Simpan
+    Boundary->>Control: 5: store()
+    Control->>Entity: 6: insert()
+    Entity-->>Control: 7: success
+    Control->>Control: 8: Redirect ke Detail Jadwal
 ```
 
 ---
@@ -592,19 +600,20 @@ Menggambarkan alur pencatatan rekam medis Ibu Hamil saat kegiatan posyandu.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor Kader as Kader / Admin
     participant Boundary as v_tambah_pregnancy_record
     participant Control as c_pregnancy_record
     participant Entity as m_pregnancy_record
 
-    Kader->>Control: create()
-    Control->>Boundary: create()
-    Kader->>Boundary: Isi tensi darah, lingkar lengan, DJJ janin, dsb
-    Kader->>Boundary: klik tombol Simpan
-    Boundary->>Control: store()
-    Control->>Entity: insert()
-    Entity-->>Control: success
-    Control->>Control: Redirect ke Detail Jadwal
+    Kader->>Control: 1: create()
+    Control->>Boundary: 2: create()
+    Kader->>Boundary: 3: Isi tensi darah, lingkar lengan, DJJ janin, dsb
+    Kader->>Boundary: 4: klik tombol Simpan
+    Boundary->>Control: 5: store()
+    Control->>Entity: 6: insert()
+    Entity-->>Control: 7: success
+    Control->>Control: 8: Redirect ke Detail Jadwal
 ```
 
 ---
@@ -614,17 +623,18 @@ Menggambarkan alur pemeriksaan dan pencatatan kesehatan lansia saat kegiatan pos
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor Kader as Kader / Admin
     participant Boundary as v_tambah_elderly_record
     participant Control as c_elderly_record
     participant Entity as m_elderly_record
 
-    Kader->>Control: create()
-    Control->>Boundary: create()
-    Kader->>Boundary: Isi berat, tensi, gula darah, kolesterol, asam urat
-    Kader->>Boundary: klik tombol Simpan
-    Boundary->>Control: store()
-    Control->>Entity: insert()
-    Entity-->>Control: success
-    Control->>Control: Redirect ke Detail Jadwal
+    Kader->>Control: 1: create()
+    Control->>Boundary: 2: create()
+    Kader->>Boundary: 3: Isi berat, tensi, gula darah, kolesterol, asam urat
+    Kader->>Boundary: 4: klik tombol Simpan
+    Boundary->>Control: 5: store()
+    Control->>Entity: 6: insert()
+    Entity-->>Control: 7: success
+    Control->>Control: 8: Redirect ke Detail Jadwal
 ```
